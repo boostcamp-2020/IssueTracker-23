@@ -9,4 +9,4 @@
 - [wiki](https://github.com/boostcamp-2020/IssueTracker-23/wiki)
 
 ## 프로젝트 진행 보드
-- [국룰](https://github.com/boostcamp-2020/IssueTracker-23/projects/1)
+- [프로젝트](https://github.com/boostcamp-2020/IssueTracker-23/projects/1)
