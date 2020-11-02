@@ -14,7 +14,12 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'no-use-before-define': 'off',
     'no-shadow': 'off',
     'no-restricted-globals': 'off',
