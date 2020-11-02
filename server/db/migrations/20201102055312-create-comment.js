@@ -11,7 +11,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      deleteAt: {
+      deletedAt: {
         type: Sequelize.DATE,
         field: 'deleted_at',
       },
