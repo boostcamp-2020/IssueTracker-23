@@ -1,4 +1,5 @@
 const db = require('../db/models');
+const { update } = require('./comment');
 
 class IssueModel {
   static create(issueData) {
@@ -17,12 +18,17 @@ class IssueModel {
     })
   }
 
-  static updateIssueDetail() {
-
+  static updateIssueDetail({ repositoryId, updateIssueData }) {
+    return db.issue.update(
+      {
+        title: updateIssueData.title,
+        description: updateIssueData.description,
+        milestone_id: updateIssueData.milestoneId
+      },
+      { where: { repositoryId, issueNumber: updateIssueData.id } }
+    )
   }
 
   static updateOpenState() {
   }
 }
-
-module.exports = IssueModel;
