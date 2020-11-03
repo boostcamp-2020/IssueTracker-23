@@ -6,8 +6,8 @@ class IssueModel {
     return db.issue.create(issueData)
   }
 
-  static readIssueList() {
-
+  static readIssueList({ repositoryId }) {
+    return db.issue.findAll({ where: { repositoryId } })
   }
 
   static readIssueDetail() {
