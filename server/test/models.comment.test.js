@@ -28,6 +28,18 @@ describe('CommentModel.create() 메소드 테스트', () => {
     }).rejects.toThrow();
   });
 
+  test('author가 존재하지 않는 경우 새로운 comment 생성 실패', async () => {
+    const commentInfo = {
+      description: 'comment test 실패',
+      issueId: 1,
+      author: '없는 id',
+    };
+
+    await expect(async () => {
+      await CommentModel.create(commentInfo);
+    }).rejects.toThrow();
+  });
+
   afterAll(async () => {
     await db.sequelize.close();
   });
