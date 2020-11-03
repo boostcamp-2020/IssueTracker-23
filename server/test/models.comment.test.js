@@ -39,8 +39,8 @@ describe('CommentModel.create() 메소드 테스트', () => {
       await CommentModel.create(commentInfo);
     }).rejects.toThrow();
   });
+});
 
-  afterAll(async () => {
-    await db.sequelize.close();
-  });
+afterAll(async () => {
+  await db.sequelize.close();
 });
