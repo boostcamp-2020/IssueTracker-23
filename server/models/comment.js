@@ -22,8 +22,8 @@ class CommentModel {
     );
   }
 
-  static async delete() {
-    // TODO: 해당 comment 삭제
+  static async delete({ commentId }) {
+    return db.comment.destroy({ where: { id: commentId } });
   }
 }
 
