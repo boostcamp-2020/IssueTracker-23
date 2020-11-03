@@ -10,12 +10,19 @@ class CommentModel {
     return newComment;
   }
 
-  static async readCommentsByIssueId() {
-    // TODO: issue 작성된 comment를 모두 읽어오는 메소드
+  static async readCommentsByIssueId({ issueId }) {
+    const comments = await db.comment.findAll({ where: { issueId } });
+    return comments;
   }
 
-  static async update() {
-    // TODO: 해당 comment 수정
+  static async update({ commentId, description }) {
+    const updatedComment = await db.comment.update(
+      { description },
+      {
+        where: { id: commentId },
+      }
+    );
+    return updatedComment;
   }
 
   static async delete() {
