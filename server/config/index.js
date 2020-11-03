@@ -14,7 +14,7 @@ const development = {
 const test = {
   username: env.DB_USERNAME,
   password: env.DB_PASSWORD,
-  database: env.DB_DEV_NAME,
+  database: env.DB_TEST_NAME,
   host: env.HOST,
   port: parseInt(env.DB_PORT, 10),
   dialect: env.DB_DIALECT,
