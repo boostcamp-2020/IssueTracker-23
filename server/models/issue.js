@@ -29,6 +29,23 @@ class IssueModel {
     )
   }
 
-  static updateOpenState() {
+  static updateOpenState({ repositoryId, stateData }) {
+    if (stateData.open) {
+      return db.issue.update(
+        {
+          closedAt: null
+        },
+        {
+          where: { repositoryId, issueNumber: stateData.id }
+        }
+      )
+    }
+    console.log(stateData)
+    return db.issue.update(
+      { closedAt: new Date().toISOString().slice(0, 19).replace('T', ' ') },
+      { where: { repositoryId, issueNumber: stateData.id } }
+    )
   }
 }
+
+module.exports = IssueModel;
