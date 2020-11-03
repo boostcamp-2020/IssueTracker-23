@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       description: DataTypes.TEXT,
       dueDate: DataTypes.DATE,
-      closeDate: DataTypes.DATE,
+      closedAt: DataTypes.DATE,
       repositoryId: {
         allowNull: false,
         type: DataTypes.INTEGER,

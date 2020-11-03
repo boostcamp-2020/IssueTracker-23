@@ -14,9 +14,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      closeAt: {
+      closedAt: {
         type: Sequelize.DATE,
-        field: 'close_at',
+        field: 'closed_at',
       },
       issueNumber: {
         allowNull: false,
