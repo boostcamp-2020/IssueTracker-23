@@ -3,11 +3,11 @@ const { update } = require('./comment');
 
 class IssueModel {
   static create(issueData) {
-    //title,description,issueNumber,author,milestoneId,repositoryId
+    //issueData: title,description,issueNumber,author,milestoneId,repositoryId
     return db.issue.create(issueData)
   }
 
-  static readIssueList({ repositoryId }) {
+  static readIssueList(repositoryId) {
     return db.issue.findAll({ where: { repositoryId } })
   }
 
@@ -18,7 +18,8 @@ class IssueModel {
     })
   }
 
-  static updateIssueDetail({ repositoryId, updateIssueData }) {
+  static updateIssueDetail( repositoryId, updateIssueData ) {
+    //updateIssueData: id, title, description, milestoneId
     return db.issue.update(
       {
         title: updateIssueData.title,
@@ -29,7 +30,8 @@ class IssueModel {
     )
   }
 
-  static updateOpenState({ repositoryId, stateData }) {
+  static updateOpenState( repositoryId, stateData ) {
+    //stateData: id, open
     if (stateData.open) {
       return db.issue.update(
         {
@@ -40,7 +42,6 @@ class IssueModel {
         }
       )
     }
-    console.log(stateData)
     return db.issue.update(
       { closedAt: new Date().toISOString().slice(0, 19).replace('T', ' ') },
       { where: { repositoryId, issueNumber: stateData.id } }
