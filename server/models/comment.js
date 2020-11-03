@@ -1,28 +1,25 @@
 const db = require('../db/models');
 
 class CommentModel {
-  static async create({ description, author, issueId }) {
-    const newComment = await db.comment.create({
+  static create({ description, author, issueId }) {
+    return db.comment.create({
       description,
       author,
       issueId,
     });
-    return newComment;
   }
 
-  static async readCommentsByIssueId({ issueId }) {
-    const comments = await db.comment.findAll({ where: { issueId } });
-    return comments;
+  static readCommentsByIssueId({ issueId }) {
+    return db.comment.findAll({ where: { issueId } });
   }
 
-  static async update({ commentId, description }) {
-    const updatedComment = await db.comment.update(
+  static update({ commentId, description }) {
+    return db.comment.update(
       { description },
       {
         where: { id: commentId },
       }
     );
-    return updatedComment;
   }
 
   static async delete() {
