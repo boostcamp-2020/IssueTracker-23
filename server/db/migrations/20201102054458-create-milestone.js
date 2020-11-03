@@ -18,9 +18,9 @@ module.exports = {
         type: Sequelize.DATE,
         field: 'due_date',
       },
-      closeDate: {
+      closedAt: {
         type: Sequelize.DATE,
-        field: 'close_date',
+        field: 'closed_at',
       },
       repositoryId: {
         allowNull: false,

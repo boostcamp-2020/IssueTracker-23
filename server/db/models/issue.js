@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       description: DataTypes.STRING,
-      closeAt: DataTypes.DATE,
+      closedAt: DataTypes.DATE,
       issueNumber: {
         allowNull: false,
         type: DataTypes.INTEGER,
