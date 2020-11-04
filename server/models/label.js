@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const db = require('../db/models').label;
 
 class LabelModel {
@@ -11,9 +12,15 @@ class LabelModel {
     });
   }
 
-  static findLabelByName(name) {
+  static findByName(name, repositoryId, labelId = null) {
     return db.findOne({
-      where: { name },
+      where: {
+        name,
+        repositoryId,
+        id: {
+          [Op.not]: labelId,
+        },
+      },
     });
   }
 
