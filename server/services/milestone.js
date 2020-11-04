@@ -21,6 +21,11 @@ class MilestoneService {
     });
     return { count, repositoryId, milestones: milestoneArray };
   }
+
+  static async update(milestoneData, milestoneId) {
+    const [count] = await MilestoneModel.update(milestoneData, milestoneId);
+    return count === 0 ? null : { id: milestoneId };
+  }
 }
 
 module.exports = MilestoneService;
