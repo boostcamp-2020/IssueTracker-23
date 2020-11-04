@@ -46,11 +46,7 @@ class LabelService {
   }
 
   static async isDuplicatedName(name, repositoryId, labelId) {
-    const foundLabel = await LabelModel.findLabelByName(
-      name,
-      repositoryId,
-      labelId
-    );
+    const foundLabel = await LabelModel.findByName(name, repositoryId, labelId);
     if (foundLabel === null) return false;
     return true;
   }

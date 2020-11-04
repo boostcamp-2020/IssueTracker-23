@@ -12,7 +12,7 @@ class LabelModel {
     });
   }
 
-  static findLabelByName(name, repositoryId, labelId = null) {
+  static findByName(name, repositoryId, labelId = null) {
     return db.findOne({
       where: {
         name,
