@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       models.issue.hasMany(models.comment, { foreignKey: 'author' });
       models.issue.belongsToMany(models.label, {
         through: 'issue_label',
-        foreignKey: 'issue_id',
+        foreignKey: 'issueId',
       });
       models.issue.belongsToMany(models.user, {
         through: 'assignee',
-        foreignKey: 'issue_id',
+        foreignKey: 'issueId',
       });
     }
   }

@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.repository.hasMany(models.label, { foreignKey: 'repository_id' });
+      models.repository.hasMany(models.label, { foreignKey: 'repositoryId' });
       models.repository.hasMany(models.milestone, {
-        foreignKey: 'repository_id',
+        foreignKey: 'repositoryId',
       });
-      models.repository.hasMany(models.issue, { foreignKey: 'repository_id' });
+      models.repository.hasMany(models.issue, { foreignKey: 'repositoryId' });
       models.repository.belongsToMany(models.user, {
         through: 'member',
-        foreignKey: 'repository_id',
+        foreignKey: 'repositoryId',
       });
     }
   }

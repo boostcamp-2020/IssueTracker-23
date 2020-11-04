@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       models.user.hasMany(models.comment, { foreignKey: 'author' });
       models.user.belongsToMany(models.repository, {
         through: 'member',
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
       });
       models.user.belongsToMany(models.issue, {
         through: 'assignee',
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
       });
     }
   }
