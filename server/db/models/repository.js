@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'repository',
       underscored: true,
       freezeTableName: true,
+      paranoid: true,
     }
   );
   return Repository;

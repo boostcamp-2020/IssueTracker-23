@@ -39,6 +39,10 @@ module.exports = {
         type: Sequelize.DATE,
         field: 'updated_at',
       },
+      deletedAt: {
+        type: Sequelize.DATE,
+        field: 'deleted_at',
+      },
     });
   },
   down: async (queryInterface) => {

@@ -47,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'issue',
       underscored: true,
       freezeTableName: true,
+      paranoid: true,
     }
   );
   return Issue;
