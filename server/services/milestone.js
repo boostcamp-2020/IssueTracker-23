@@ -26,6 +26,11 @@ class MilestoneService {
     const [count] = await MilestoneModel.update(milestoneData, milestoneId);
     return count === 0 ? null : { id: milestoneId };
   }
+
+  static async delete(milestoneId) {
+    const deletedCount = await MilestoneModel.delete(milestoneId);
+    return deletedCount === 0 ? null : { id: milestoneId };
+  }
 }
 
 module.exports = MilestoneService;
