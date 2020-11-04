@@ -50,4 +50,3 @@ class MilestoneModel {
 }
 
 module.exports = MilestoneModel;
-

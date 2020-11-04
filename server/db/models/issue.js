@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.issue.hasMany(models.comment, { foreignKey: 'author' });
+      models.issue.hasMany(models.comment);
+      models.issue.belongsTo(models.milestone, { foreignKey: 'milestone_id' });
       models.issue.belongsToMany(models.label, {
         through: 'issue_label',
-        foreignKey: 'issueId',
       });
       models.issue.belongsToMany(models.user, {
         through: 'assignee',
-        foreignKey: 'issueId',
+        as: 'assignees',
       });
     }
   }
