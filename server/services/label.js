@@ -8,7 +8,19 @@ class LabelService {
     return newLabel.id;
   }
 
-  // read()
+  static async readAll(repositoryId) {
+    const labels = await LabelModel.read(repositoryId);
+    const count = labels.length;
+    const labelArray = labels.map((label) => {
+      return {
+        id: label.id,
+        name: label.name,
+        description: label.description,
+        color: label.color,
+      };
+    });
+    return { count, repositoryId, labels: labelArray };
+  }
 
   static async update(labelData) {
     if (await LabelService.isDuplicatedName(labelData.name))
