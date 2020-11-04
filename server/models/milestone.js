@@ -20,7 +20,7 @@ class MilestoneModel {
     });
   }
 
-  static findByTitle(title, repositoryId, milestoneId) {
+  static findByTitle(title, repositoryId, milestoneId = null) {
     return db.findOne({
       where: {
         title,
