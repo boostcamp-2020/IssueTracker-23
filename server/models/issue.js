@@ -7,12 +7,34 @@ class IssueModel {
   }
 
   static readIssueList(repositoryId) {
-    return db.issue.findAll({ where: { repositoryId } });
+    return db.issue.findAll({
+      where: { repositoryId },
+      include: [
+        { model: db.label, attributes: ['id', 'name', 'color'] },
+        {
+          model: db.user,
+          attributes: ['id', 'userName', 'profile_url'],
+          as: 'assignees',
+        },
+        db.comment,
+        db.milestone,
+      ],
+    });
   }
 
   static readIssueDetail(repositoryId, issueNumber) {
     return db.issue.findOne({
       where: { issueNumber, repositoryId },
+      include: [
+        { model: db.label, attributes: ['id', 'name', 'color'] },
+        {
+          model: db.user,
+          attributes: ['id', 'userName', 'profile_url'],
+          as: 'assignees',
+        },
+        db.comment,
+        db.milestone,
+      ],
     });
   }
 
@@ -26,6 +48,20 @@ class IssueModel {
       },
       { where: { repositoryId, issueNumber } }
     );
+  }
+
+  static async setAssignees(issueId, assignees) {
+    const foundUsers = await db.user.findAll({ where: { id: assignees } });
+    const issue = await db.issue.findOne({ where: { id: issueId } });
+    const resultArray = await issue.setAssignees(foundUsers);
+    return resultArray;
+  }
+
+  static async setLabels(issueId, labels) {
+    const foundlabels = await db.label.findAll({ where: { id: labels } });
+    const issue = await db.issue.findOne({ where: { id: issueId } });
+    const resultArray = await issue.setLabels(foundlabels);
+    return resultArray;
   }
 
   static updateOpenState(repositoryId, issueNumber, isOpen) {
