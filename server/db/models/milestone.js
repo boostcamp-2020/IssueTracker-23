@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'milestone',
       underscored: true,
       freezeTableName: true,
+      paranoid: true,
     }
   );
   return Milestone;
