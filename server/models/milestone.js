@@ -20,6 +20,12 @@ class MilestoneModel {
     });
   }
 
+  static findMilestoneByTitle(title) {
+    return db.findOne({
+      where: { title },
+    });
+  }
+
   static update(milestoneData, milestoneId) {
     return db.update(milestoneData, {
       where: {
