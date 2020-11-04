@@ -11,6 +11,7 @@ describe('CommentModel.create() 메소드 테스트', () => {
 
     const newComment = await CommentModel.create(commentInfo);
 
+    expect(typeof newComment.id).toBe('number');
     expect(newComment.issueId).toBe(commentInfo.issueId);
     expect(newComment.author).toBe(commentInfo.author);
     expect(newComment.description).toBe(commentInfo.description);
