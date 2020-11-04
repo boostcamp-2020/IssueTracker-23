@@ -45,7 +45,7 @@ class LabelService {
     return deletedCount === 0 ? null : { id: labelId };
   }
 
-  static async isDuplicatedName(name, repositoryId, labelId) {
+  static async isDuplicatedName(name, repositoryId, labelId = null) {
     const foundLabel = await LabelModel.findByName(name, repositoryId, labelId);
     if (foundLabel === null) return false;
     return true;
