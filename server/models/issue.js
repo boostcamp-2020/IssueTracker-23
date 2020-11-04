@@ -7,12 +7,34 @@ class IssueModel {
   }
 
   static readIssueList(repositoryId) {
-    return db.issue.findAll({ where: { repositoryId } });
+    return db.issue.findAll({
+      where: { repositoryId },
+      include: [
+        { model: db.label, attributes: ['id', 'name', 'color'] },
+        {
+          model: db.user,
+          attributes: ['id', 'userName', 'profile_url'],
+          as: 'assignees',
+        },
+        db.comment,
+        db.milestone,
+      ],
+    });
   }
 
   static readIssueDetail(repositoryId, issueNumber) {
     return db.issue.findOne({
       where: { issueNumber, repositoryId },
+      include: [
+        { model: db.label, attributes: ['id', 'name', 'color'] },
+        {
+          model: db.user,
+          attributes: ['id', 'userName', 'profile_url'],
+          as: 'assignees',
+        },
+        db.comment,
+        db.milestone,
+      ],
     });
   }
 
