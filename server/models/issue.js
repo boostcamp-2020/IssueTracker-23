@@ -50,6 +50,20 @@ class IssueModel {
     );
   }
 
+  static async setAssignees(issueId, assignees) {
+    const foundUsers = await db.user.findAll({ where: { id: assignees } });
+    const issue = await db.issue.findOne({ where: { id: issueId } });
+    const resultArray = await issue.setAssignees(foundUsers);
+    return resultArray;
+  }
+
+  static async setLabels(issueId, labels) {
+    const foundlabels = await db.label.findAll({ where: { id: labels } });
+    const issue = await db.issue.findOne({ where: { id: issueId } });
+    const resultArray = await issue.setLabels(foundlabels);
+    return resultArray;
+  }
+
   static updateOpenState(repositoryId, issueNumber, isOpen) {
     const openState = isOpen
       ? null
