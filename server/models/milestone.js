@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const db = require('../db/models').milestone;
 const model = require('../db/models');
 const getDateTime = require('../util/date');
@@ -20,9 +21,15 @@ class MilestoneModel {
     });
   }
 
-  static findMilestoneByTitle(title) {
+  static findMilestoneByTitle(title, repositoryId, milestoneId) {
     return db.findOne({
-      where: { title },
+      where: {
+        title,
+        repositoryId,
+        id: {
+          [Op.not]: milestoneId,
+        },
+      },
     });
   }
 
