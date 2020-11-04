@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Assignee.init(
     {
-      issueId: {
-        primaryKey: true,
-        type: DataTypes.INTERGER,
-      },
       userId: {
         primaryKey: true,
         type: DataTypes.STRING,
+      },
+      issueId: {
+        primaryKey: true,
+        type: DataTypes.INTEGER,
       },
     },
     {
