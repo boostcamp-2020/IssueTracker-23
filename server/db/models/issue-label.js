@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       issueId: {
         primaryKey: true,
-        type: DataTypes.INTERGER,
+        type: DataTypes.INTEGER,
       },
       labelId: {
         primaryKey: true,
-        type: DataTypes.INTERGER,
+        type: DataTypes.INTEGER,
       },
     },
     {

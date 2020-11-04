@@ -7,9 +7,13 @@ class LabelModel {
 
   static read(repositoryId) {
     return db.findAll({
-      where: {
-        repositoryId,
-      },
+      where: { repositoryId },
+    });
+  }
+
+  static findLabelByName(name) {
+    return db.findOne({
+      where: { name },
     });
   }
 
