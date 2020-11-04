@@ -5,7 +5,7 @@ class LabelService {
     if (await LabelService.isDuplicatedName(labelData.name))
       throw Error('title has already been taken');
     const newLabel = await LabelModel.create(labelData);
-    return newLabel.id;
+    return { id: newLabel.id };
   }
 
   static async readAll(repositoryId) {
@@ -26,12 +26,12 @@ class LabelService {
     if (await LabelService.isDuplicatedName(labelData.name))
       throw Error('title has already been taken');
     const [count] = await LabelModel.update(labelData);
-    return count === 0 ? null : labelData.id;
+    return count === 0 ? null : { id: labelData.id };
   }
 
   static async delete(labelId) {
     const deletedCount = await LabelModel.delete(labelId);
-    return deletedCount === 0 ? null : labelId;
+    return deletedCount === 0 ? null : { id: labelId };
   }
 
   static async isDuplicatedName(name) {
