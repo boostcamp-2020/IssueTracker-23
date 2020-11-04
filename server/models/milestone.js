@@ -1,7 +1,6 @@
 const { Op } = require('sequelize');
 const db = require('../db/models').milestone;
 const model = require('../db/models');
-const getDateTime = require('../util/date');
 
 class MilestoneModel {
   static create(milestoneData) {
@@ -47,18 +46,6 @@ class MilestoneModel {
         id: milestoneId,
       },
     });
-  }
-
-  static updateOpenState(milestoneId, isOpen) {
-    const closeAt = isOpen ? null : getDateTime();
-    return db.update(
-      { closeAt },
-      {
-        where: {
-          milestoneId,
-        },
-      }
-    );
   }
 }
 
