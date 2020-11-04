@@ -17,7 +17,10 @@ class LabelService {
     return count === 0 ? null : labelData.id;
   }
 
-  // delete()
+  static async delete(labelId) {
+    const deletedCount = await LabelModel.delete(labelId);
+    return deletedCount === 0 ? null : labelId;
+  }
 
   static async isDuplicatedName(name) {
     const foundLabel = await LabelModel.findLabelByName(name);
