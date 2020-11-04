@@ -8,11 +8,11 @@ class MilestoneModel {
   }
 
   static async readAll(repositoryId) {
-    const query = `SELECT A.id,A.title,A.description,A.due_date,A.closed_at,A.created_at,A.updated_at,COUNT(if(B.closed_at IS NULL,1,null)) AS nOpen,COUNT(if(B.closed_at IS NOT NULL,B.closed_at,null)) AS nClose
+    const query = `SELECT A.id,A.title,A.description,A.due_date,A.closed_at,A.created_at,A.updated_at,COUNT(B.id) AS nTotal,COUNT(B.closed_at) AS nClose
     FROM milestone A 
     LEFT join issue B
     ON A.id = B.milestone_id
-    WHERE B.repository_id = :repository_id
+    WHERE A.repository_id = :repository_id
     GROUP by A.id`;
 
     return model.sequelize.query(query, {
@@ -50,4 +50,3 @@ class MilestoneModel {
 }
 
 module.exports = MilestoneModel;
-
