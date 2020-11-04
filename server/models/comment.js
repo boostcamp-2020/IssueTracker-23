@@ -22,7 +22,7 @@ class CommentModel {
     );
   }
 
-  static async delete({ commentId }) {
+  static delete({ commentId }) {
     return db.comment.destroy({ where: { id: commentId } });
   }
 }
