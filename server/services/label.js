@@ -10,7 +10,12 @@ class LabelService {
 
   // read()
 
-  // update()
+  static async update(labelData) {
+    if (await LabelService.isDuplicatedName(labelData.name))
+      throw Error('title has already been taken');
+    const [count] = await LabelModel.update(labelData);
+    return count === 0 ? null : labelData.id;
+  }
 
   // delete()
 
