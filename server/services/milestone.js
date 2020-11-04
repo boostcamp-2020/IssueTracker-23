@@ -5,6 +5,22 @@ class MilestoneService {
     const newMilestone = await MilestoneModel.create(milestoneData);
     return { id: newMilestone.id };
   }
+
+  static async readAll(repositoryId) {
+    const milestones = await MilestoneModel.readAll(repositoryId);
+    const count = milestones.length;
+    const milestoneArray = milestones.map(([milestone]) => {
+      return {
+        id: milestone.id,
+        title: milestone.title,
+        description: milestone.description,
+        dueDate: milestone.due_date,
+        numberOfTotalIssues: milestone.nTotal,
+        numberOfClosedIssues: milestone.nClose,
+      };
+    });
+    return { count, repositoryId, milestones: milestoneArray };
+  }
 }
 
 module.exports = MilestoneService;
