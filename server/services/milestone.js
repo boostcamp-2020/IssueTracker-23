@@ -55,7 +55,7 @@ class MilestoneService {
   }
 
   static async isDuplicatedTitle(title, repositoryId, milestoneId = null) {
-    const foundMilestone = await MilestoneModel.findMilestoneByTitle(
+    const foundMilestone = await MilestoneModel.findByTitle(
       title,
       repositoryId,
       milestoneId
