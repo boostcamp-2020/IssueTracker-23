@@ -1,51 +1,41 @@
 const db = require('../db/models');
-const { update } = require('./comment');
 
 class IssueModel {
   static create(issueData) {
-    //issueData: title,description,issueNumber,author,milestoneId,repositoryId
-    return db.issue.create(issueData)
+    // issueData: title,description,issueNumber,author,milestoneId,repositoryId
+    return db.issue.create(issueData);
   }
 
   static readIssueList(repositoryId) {
-    return db.issue.findAll({ where: { repositoryId } })
+    return db.issue.findAll({ where: { repositoryId } });
   }
 
-  static readIssueDetail({ repositoryId, issueNumber }) {
+  static readIssueDetail(repositoryId, issueNumber) {
     return db.issue.findOne({
       where: { issueNumber, repositoryId },
-      attributes: ['id', 'title', 'description', 'issueNumber', 'milestone_id', 'repository_id', 'createdAt', 'updatedAt', 'closedAt', 'author']
-    })
+    });
   }
 
-  static updateIssueDetail( repositoryId, updateIssueData ) {
-    //updateIssueData: id, title, description, milestoneId
+  static updateIssueDetail(repositoryId, issueNumber, updateIssueData) {
+    // updateIssueData:  title, description, milestoneId
     return db.issue.update(
       {
         title: updateIssueData.title,
         description: updateIssueData.description,
-        milestone_id: updateIssueData.milestoneId
+        milestoneId: updateIssueData.milestoneId,
       },
-      { where: { repositoryId, issueNumber: updateIssueData.id } }
-    )
+      { where: { repositoryId, issueNumber } }
+    );
   }
 
-  static updateOpenState( repositoryId, stateData ) {
-    //stateData: id, open
-    if (stateData.open) {
-      return db.issue.update(
-        {
-          closedAt: null
-        },
-        {
-          where: { repositoryId, issueNumber: stateData.id }
-        }
-      )
-    }
+  static updateOpenState(repositoryId, issueNumber, isOpen) {
+    const openState = isOpen
+      ? null
+      : new Date().toISOString().slice(0, 19).replace('T', ' ');
     return db.issue.update(
-      { closedAt: new Date().toISOString().slice(0, 19).replace('T', ' ') },
-      { where: { repositoryId, issueNumber: stateData.id } }
-    )
+      { closedAt: openState },
+      { where: { repositoryId, issueNumber } }
+    );
   }
 }
 
