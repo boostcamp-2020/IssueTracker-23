@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.issue.hasMany(models.comment);
       models.issue.belongsTo(models.milestone, { foreignKey: 'milestone_id' });
+      models.issue.belongsTo(models.user, {
+        foreignKey: 'author',
+        as: 'issueAuthor',
+      });
       models.issue.belongsToMany(models.label, {
         through: 'issue_label',
       });

@@ -10,6 +10,11 @@ class IssueModel {
     return db.issue.findAll({
       where: { repositoryId },
       include: [
+        {
+          model: db.user,
+          attributes: ['id', 'userName', 'profileUrl'],
+          as: 'issueAuthor',
+        },
         { model: db.label, attributes: ['id', 'name', 'color'] },
         {
           model: db.user,
@@ -26,6 +31,11 @@ class IssueModel {
     return db.issue.findOne({
       where: { issueNumber, repositoryId },
       include: [
+        {
+          model: db.user,
+          attributes: ['id', 'userName', 'profileUrl'],
+          as: 'issueAuthor',
+        },
         { model: db.label, attributes: ['id', 'name', 'color'] },
         {
           model: db.user,
