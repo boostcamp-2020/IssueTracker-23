@@ -8,26 +8,7 @@ class IssueModel {
   }
 
   static async readIssueList(repositoryId, filterData) {
-    const filter = {
-      repositoryId,
-      [Op.or]: [
-        {
-          title: {
-            [Op.like]: `%${filterData.q || ''}%`,
-          },
-        },
-        {
-          description: {
-            [Op.like]: `%${filterData.q || ''}%`,
-          },
-        },
-      ],
-    };
-    if (filterData.isOpen !== undefined)
-      filter.closedAt = filterData.isOpen ? null : { [Op.not]: null };
-    if (filterData.author !== undefined) filter.author = filterData.author;
-    if (filterData.milestoneId !== undefined)
-      filter.milestoneId = filterData.milestoneId;
+    const filter = IssueModel.makeFilter(repositoryId, filterData);
 
     const issues = await db.issue.findAll({
       where: filter,
@@ -56,11 +37,8 @@ class IssueModel {
         db.milestone,
       ],
     });
-    return issues.filter((issue) => {
-      return filterData.label
-        ? issue.labels.length >= filterData.label.length
-        : true;
-    });
+
+    return IssueModel.labelFilter(issues, filterData.label);
   }
 
   static readIssueDetail(repositoryId, issueNumber) {
@@ -113,6 +91,36 @@ class IssueModel {
       { closedAt: openState },
       { where: { repositoryId, issueNumber } }
     );
+  }
+
+  static makeFilter(repositoryId, filterData) {
+    const filter = {
+      repositoryId,
+      [Op.or]: [
+        {
+          title: {
+            [Op.like]: `%${filterData.q || ''}%`,
+          },
+        },
+        {
+          description: {
+            [Op.like]: `%${filterData.q || ''}%`,
+          },
+        },
+      ],
+    };
+    if (filterData.isOpen !== undefined)
+      filter.closedAt = filterData.isOpen ? null : { [Op.not]: null };
+    if (filterData.author !== undefined) filter.author = filterData.author;
+    if (filterData.milestoneId !== undefined)
+      filter.milestoneId = filterData.milestoneId;
+    return filter;
+  }
+
+  static labelFilter(issues, filterLabel) {
+    return issues.filter((issue) => {
+      return filterLabel ? issue.labels.length >= filterLabel.length : true;
+    });
   }
 }
 
