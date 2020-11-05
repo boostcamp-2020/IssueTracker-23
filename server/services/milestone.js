@@ -1,5 +1,4 @@
 const MilestoneModel = require('../models/milestone');
-const { getDateTime } = require('../util/date');
 
 class MilestoneService {
   static async create(milestoneData) {
@@ -40,12 +39,6 @@ class MilestoneService {
     )
       throw Error('title has already been taken');
     const [count] = await MilestoneModel.update(milestoneData, milestoneId);
-    return count === 0 ? null : { id: milestoneId };
-  }
-
-  static async updateOpenState(milestoneId, isOpen) {
-    const closedAt = isOpen ? null : getDateTime();
-    const [count] = await MilestoneModel.update({ closedAt }, milestoneId);
     return count === 0 ? null : { id: milestoneId };
   }
 
