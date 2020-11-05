@@ -19,13 +19,39 @@ router
     const milestoneData = req.body;
     milestoneData.repositoryId = repositoryId;
     try {
-      const { id } = await MilestoneService.ccreate(milestoneData);
+      const { id } = await MilestoneService.create(milestoneData);
       res.status(resCode.CREATED).json({ message: 'Success', data: id });
     } catch (err) {
       res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
     }
   })
-  .put('/:repositoryId', async (req, res) => {})
-  .delete('/:repositoryId/:milestoneId', async (req, res) => {});
+  .put('/:repositoryId', async (req, res) => {
+    const { repositoryId } = req.params;
+    const milestoneData = req.body;
+    milestoneData.repositoryId = repositoryId;
+    try {
+      const { id } = await MilestoneService.update(
+        milestoneData,
+        milestoneData.id
+      );
+      if (id) res.status(resCode.OK).json({ message: 'Success', data: id });
+      else res.status(res.NOT_FOUND).send('fail');
+    } catch (err) {
+      res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
+    }
+  })
+  .delete('/:repositoryId/:milestoneId', async (req, res) => {
+    const { milestoneId } = req.params;
+    try {
+      const deleteCount = await MilestoneService.delete(milestoneId);
+      if (deleteCount)
+        res
+          .status(resCode.OK)
+          .json({ message: 'Success', data: { id: milestoneId } });
+      else res.status(resCode.NOT_FOUND).send('fail');
+    } catch (err) {
+      res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
+    }
+  });
 
 module.exports = router;
