@@ -24,6 +24,7 @@ class IssueModel {
           where: {
             id: filterData.label || { [Op.not]: null },
           },
+        },
         {
           model: db.user,
           attributes: ['id', 'profileUrl'],
