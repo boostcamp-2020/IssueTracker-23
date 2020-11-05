@@ -13,8 +13,8 @@ class IssueService {
     return { id: newIssue.id };
   }
 
-  static async readAllIssue(repositoryId,filterData) {
-    const issueList = await IssueModel.readIssueList(repositoryId,filterData);
+  static async readList(repositoryId, filterData) {
+    const issueList = await IssueModel.readIssueList(repositoryId, filterData);
     const issueArray = issueList.map((issue) => {
       const labelList = issue.labels.map((label) => {
         return {
