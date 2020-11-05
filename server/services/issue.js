@@ -100,7 +100,7 @@ class IssueService {
       issueNumber: issue.issueNumber,
       labels: labelList,
       assignees: assigneeList,
-     milestone: {
+      milestone: {
         id: foundMilestone.id,
         title: foundMilestone.title,
         dueDate: foundMilestone.dueDate,
