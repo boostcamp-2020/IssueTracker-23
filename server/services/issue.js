@@ -85,6 +85,7 @@ class IssueService {
         description: comment.description,
       };
     });
+    const foundMilestone = await MilestoneModel.readOne(issue.milestoneId);
     return {
       title: issue.title,
       description: issue.description,
@@ -99,6 +100,13 @@ class IssueService {
       issueNumber: issue.issueNumber,
       labels: labelList,
       assignees: assigneeList,
+      milestone: {
+        id: foundMilestone.id,
+        title: foundMilestone.title,
+        dueDate: foundMilestone.dueDate,
+        nTotal: foundMilestone.dataValues.nTotal,
+        nClose: foundMilestone.dataValues.nClose,
+      },
       comments: commentList,
     };
   }
