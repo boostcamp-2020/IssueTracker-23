@@ -26,6 +26,8 @@ class IssueModel {
     if (filterData.isOpen !== undefined)
       filter.closedAt = filterData.isOpen ? null : { [Op.not]: null };
     if (filterData.author !== undefined) filter.author = filterData.author;
+    if (filterData.milestoneId !== undefined)
+      filter.milestoneId = filterData.milestoneId;
 
     const issues = await db.issue.findAll({
       where: filter,
@@ -34,7 +36,7 @@ class IssueModel {
           model: db.label,
           attributes: ['id', 'name', 'color'],
           where: {
-            id: filterData.label,
+            id: filterData.label || { [Op.not]: null },
           },
         },
         {
@@ -55,7 +57,9 @@ class IssueModel {
       ],
     });
     return issues.filter((issue) => {
-      return issue.labels.length >= filterData.label.length;
+      return filterData.label
+        ? issue.labels.length >= filterData.label.length
+        : true;
     });
   }
 
