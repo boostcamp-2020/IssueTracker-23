@@ -48,7 +48,7 @@ class IssueModel {
 
   static readIssueDetail(issueId) {
     return db.issue.findOne({
-      where: { issueId },
+      where: { id: issueId },
       include: [
         {
           model: db.user,

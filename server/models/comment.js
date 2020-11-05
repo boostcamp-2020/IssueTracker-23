@@ -9,8 +9,17 @@ class CommentModel {
     });
   }
 
-  static readCommentsByIssueId({ issueId }) {
-    return db.comment.findAll({ where: { issueId } });
+  static readCommentsByIssueId(issueId) {
+    return db.comment.findAll({
+      where: { issueId },
+      include: [
+        {
+          model: db.user,
+          as: 'commentAuthor',
+          attributes: ['id', 'userName', 'profileUrl'],
+        },
+      ],
+    });
   }
 
   static update({ commentId, description }) {

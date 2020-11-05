@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
+const CommentModel = require('../models/comment');
 const IssueModel = require('../models/issue');
+const MilestoneModel = require('../models/milestone');
 
 class IssueService {
   static async create(repositoryId, issueData) {
@@ -53,8 +55,8 @@ class IssueService {
     return { repositoryId, issueList: issueArray };
   }
 
-  static async readOne(repositoryId, issueNumber) {
-    const issue = await IssueModel.readIssueDetail(repositoryId, issueNumber);
+  static async readOne(issueId) {
+    const issue = await IssueModel.readIssueDetail(issueId);
     const author = issue.issueAuthor;
     const labelList = issue.labels.map((label) => {
       return {
@@ -70,7 +72,20 @@ class IssueService {
         profileUrl: assignee.profileUrl,
       };
     });
-
+    const comments = await CommentModel.readCommentsByIssueId(issueId);
+    const commentList = comments.map((comment) => {
+      return {
+        author: {
+          id: comment.commentAuthor.id,
+          userName: comment.commentAuthor.userName,
+          profileUrl: comment.commentAuthor.profileUrl,
+        },
+        createdAt: comment.createdAt,
+        updatedAt: comment.updatedAt,
+        description: comment.description,
+      };
+    });
+    const foundMilestone = await MilestoneModel.readOne(issue.milestoneId);
     return {
       title: issue.title,
       description: issue.description,
@@ -85,12 +100,18 @@ class IssueService {
       issueNumber: issue.issueNumber,
       labels: labelList,
       assignees: assigneeList,
-      milestoneId: issue.milestoneId, // milestone에서 불러와야..
-      comments: issue.commentList, // comment에서 불러와야...
+      milestone: {
+        id: foundMilestone.id,
+        title: foundMilestone.title,
+        dueDate: foundMilestone.dueDate,
+        nTotal: foundMilestone.dataValues.nTotal,
+        nClose: foundMilestone.dataValues.nClose,
+      },
+      comments: commentList,
     };
   }
 
-  static async updateDeatil(repositoryId, issueData) {
+  static async updateDetail(issueData) {
     // id,title,description,assignees:[],labels:[],milestoneId
     const [count] = await IssueModel.updateIssueDetail(issueData);
     if (issueData.assiginnes)
