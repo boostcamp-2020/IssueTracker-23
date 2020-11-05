@@ -12,7 +12,7 @@ router
       const newLabelData = await labelService.create(labelData);
       res.status(resCode.OK).json({ message: 'Success', data: newLabelData });
     } catch (err) {
-      res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
+      res.status(resCode.CREATED).send('fail');
     }
   })
   .get('/:repositoryId', async (req, res) => {
