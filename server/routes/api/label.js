@@ -10,7 +10,9 @@ router
       const labelData = req.body;
       labelData.repositoryId = req.params.repositoryId;
       const newLabelData = await labelService.create(labelData);
-      res.status(resCode.OK).json({ message: 'Success', data: newLabelData });
+      res
+        .status(resCode.CREATED)
+        .json({ message: 'Success', data: newLabelData });
     } catch (err) {
       res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
     }
@@ -36,7 +38,7 @@ router
       res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
     }
   })
-  .patch('/:repositoryId/:labelId', async (req, res) => {
+  .delete('/:repositoryId/:labelId', async (req, res) => {
     try {
       const { labelId } = req.params;
       const deleteId = await labelService.delete(labelId);
