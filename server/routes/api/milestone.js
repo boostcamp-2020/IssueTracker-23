@@ -14,6 +14,18 @@ router
       res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
     }
   })
-  .post('/:repositoryId', async (req, res) => {})
+  .post('/:repositoryId', async (req, res) => {
+    const { repositoryId } = req.params;
+    const milestoneData = req.body;
+    milestoneData.repositoryId = repositoryId;
+    try {
+      const { id } = await MilestoneService.ccreate(milestoneData);
+      res.status(resCode.CREATED).json({ message: 'Success', data: id });
+    } catch (err) {
+      res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
+    }
+  })
   .put('/:repositoryId', async (req, res) => {})
   .delete('/:repositoryId/:milestoneId', async (req, res) => {});
+
+module.exports = router;
