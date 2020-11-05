@@ -4,7 +4,7 @@ const IssueModel = require('../models/issue');
 class IssueService {
   static async create(repositoryId, issueData) {
     issueData.issueNumber = (
-      await IssueModel.readIssueList(repositoryId)
+      await IssueModel.readList(repositoryId, {})
     ).length;
     issueData.repositoryId = repositoryId;
     const newIssue = await IssueModel.create(issueData);
@@ -14,7 +14,7 @@ class IssueService {
   }
 
   static async readList(repositoryId, filterData) {
-    const issueList = await IssueModel.readIssueList(repositoryId, filterData);
+    const issueList = await IssueModel.readList(repositoryId, filterData);
     const issueArray = issueList.map((issue) => {
       const labelList = issue.labels.map((label) => {
         return {
@@ -53,8 +53,8 @@ class IssueService {
     return { repositoryId, issueList: issueArray };
   }
 
-  static async readOne(repositoryId, issueNumber) {
-    const issue = await IssueModel.readIssueDetail(repositoryId, issueNumber);
+  static async read(issueId) {
+    const issue = await IssueModel.read(issueId);
     const author = issue.issueAuthor;
     const labelList = issue.labels.map((label) => {
       return {
@@ -85,24 +85,18 @@ class IssueService {
       issueNumber: issue.issueNumber,
       labels: labelList,
       assignees: assigneeList,
-      milestoneId: issue.milestoneId, // milestone에서 불러와야..
-      comments: issue.commentList, // comment에서 불러와야...
+      milestoneId: issue.milestoneId,
+      comments: issue.commentList,
     };
   }
 
-  static async updateDeatil(repositoryId, issueData) {
-    // id,title,description,assignees:[],labels:[],milestoneId
-    const [count] = await IssueModel.updateIssueDetail(issueData);
+  static async update(issueData) {
+    const [count] = await IssueModel.update(issueData);
     if (issueData.assiginnes)
       await IssueModel.setAssignees(issueData.id, issueData.assiginnes);
     if (issueData.labels)
       await IssueModel.setLabels(issueData.id, issueData.labels);
     return count === 0 ? null : { id: issueData.id };
-  }
-
-  static async updateState(issueId, isOpen) {
-    const count = await IssueModel.updateOpenState(issueId, isOpen);
-    return count === 0 ? null : { id: issueId };
   }
 }
 
