@@ -89,6 +89,21 @@ class IssueService {
       comments: issue.commentList, // comment에서 불러와야...
     };
   }
+
+  static async updateDeatil(repositoryId, issueData) {
+    // id,title,description,assignees:[],labels:[],milestoneId
+    const [count] = await IssueModel.updateIssueDetail(issueData);
+    if (issueData.assiginnes)
+      await IssueModel.setAssignees(issueData.id, issueData.assiginnes);
+    if (issueData.labels)
+      await IssueModel.setLabels(issueData.id, issueData.labels);
+    return count === 0 ? null : { id: issueData.id };
+  }
+
+  static async updateState(issueId, isOpen) {
+    const count = await IssueModel.updateOpenState(issueId, isOpen);
+    return count === 0 ? null : { id: issueId };
+  }
 }
 
 module.exports = IssueService;
