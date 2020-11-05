@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+
 const db = require('../db/models').milestone;
 const model = require('../db/models');
 
@@ -17,6 +18,31 @@ class MilestoneModel {
 
     return model.sequelize.query(query, {
       replacements: { repository_id: repositoryId },
+    });
+  }
+
+  static async readOne(milestoneId) {
+    return db.findOne({
+      attributes: [
+        'id',
+        'title',
+        'dueDate',
+        [
+          model.sequelize.fn('COUNT', model.sequelize.col('issues.id')),
+          'nTotal',
+        ],
+        [
+          model.sequelize.fn('COUNT', model.sequelize.col('issues.closed_at')),
+          'nClose',
+        ],
+      ],
+      include: [
+        {
+          model: model.issue,
+          attributes: [],
+        },
+      ],
+      where: { id: milestoneId },
     });
   }
 
