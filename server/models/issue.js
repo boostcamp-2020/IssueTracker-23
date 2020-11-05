@@ -14,6 +14,11 @@ class IssueModel {
       where: filter,
       include: [
         {
+          model: db.user,
+          attributes: ['id', 'userName', 'profileUrl'],
+          as: 'issueAuthor',
+        },
+        {
           model: db.label,
           attributes: ['id', 'name', 'color'],
           where: {
@@ -22,7 +27,7 @@ class IssueModel {
         },
         {
           model: db.user,
-          attributes: ['id', 'userName', 'profile_url'],
+          attributes: ['id', 'profileUrl'],
           as: 'assignees',
           where: {
             id: filterData.assignee || { [Op.not]: null },
@@ -41,31 +46,36 @@ class IssueModel {
     return IssueModel.labelFilter(issues, filterData.label);
   }
 
-  static readIssueDetail(repositoryId, issueNumber) {
+  static readIssueDetail(issueId) {
     return db.issue.findOne({
-      where: { issueNumber, repositoryId },
+      where: { issueId },
       include: [
+        {
+          model: db.user,
+          attributes: ['id', 'userName', 'profileUrl'],
+          as: 'issueAuthor',
+        },
         { model: db.label, attributes: ['id', 'name', 'color'] },
         {
           model: db.user,
-          attributes: ['id', 'userName', 'profile_url'],
+          attributes: ['id', 'userName', 'profileUrl'],
           as: 'assignees',
         },
         db.comment,
-        db.milestone,
+        { model: db.milestone, attributes: ['id'] },
       ],
     });
   }
 
-  static updateIssueDetail(repositoryId, issueNumber, updateIssueData) {
-    // updateIssueData:  title, description, milestoneId
+  static updateIssueDetail(updateIssueData) {
+    // updateIssueData: id, title, description, milestoneId
     return db.issue.update(
       {
         title: updateIssueData.title,
         description: updateIssueData.description,
         milestoneId: updateIssueData.milestoneId,
       },
-      { where: { repositoryId, issueNumber } }
+      { where: { id: updateIssueData.id } }
     );
   }
 
@@ -83,14 +93,11 @@ class IssueModel {
     return resultArray;
   }
 
-  static updateOpenState(repositoryId, issueNumber, isOpen) {
+  static updateOpenState(issueId, isOpen) {
     const openState = isOpen
       ? null
       : new Date().toISOString().slice(0, 19).replace('T', ' ');
-    return db.issue.update(
-      { closedAt: openState },
-      { where: { repositoryId, issueNumber } }
-    );
+    return db.issue.update({ closedAt: openState }, { where: { id: issueId } });
   }
 
   static makeFilter(repositoryId, filterData) {
