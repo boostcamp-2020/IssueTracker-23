@@ -16,7 +16,7 @@ class MilestoneService {
   static async readAll(repositoryId) {
     const milestones = await MilestoneModel.readAll(repositoryId);
     const count = milestones.length;
-    const milestoneArray = milestones.map(([milestone]) => {
+    const milestoneArray = milestones.map((milestone) => {
       return {
         id: milestone.id,
         title: milestone.title,
