@@ -3,52 +3,65 @@ const db = require('../db/models');
 
 class IssueModel {
   static create(issueData) {
-    // issueData: title,description,issueNumber,author,milestoneId,repositoryId
     return db.issue.create(issueData);
   }
 
-  static async readIssueList(repositoryId, filterData) {
+  static async readList(repositoryId, filterData) {
     const filter = IssueModel.makeFilter(repositoryId, filterData);
+    const includeData = [];
+    const includeAuthor = {
+      model: db.user,
+      attributes: ['id', 'userName', 'profileUrl'],
+      as: 'issueAuthor',
+    };
+    const includeLabel = {
+      model: db.label,
+      attributes: ['id', 'name', 'color'],
+    };
+    const includeAssignee = {
+      model: db.user,
+      attributes: ['id', 'profileUrl'],
+      as: 'assignees',
+    };
+    const includeCommented = {
+      model: db.comment,
+    };
+    const includeMilestone = {
+      model: db.milestone,
+    };
+    if (filterData.author)
+      includeAuthor.where = {
+        id: filterData.author,
+      };
+    if (filterData.assignee)
+      includeAssignee.where = {
+        id: filterData.assignee,
+      };
+    if (filterData.commented)
+      includeCommented.where = {
+        author: filterData.commented,
+      };
+    if (filterData.milestoneId)
+      includeMilestone.where = {
+        id: filterData.milestoneId,
+      };
+    includeData.push(includeAuthor);
+    includeData.push(includeLabel);
+    includeData.push(includeAssignee);
+    includeData.push(includeCommented);
+    includeData.push(includeMilestone);
 
     const issues = await db.issue.findAll({
       where: filter,
-      include: [
-        {
-          model: db.user,
-          attributes: ['id', 'userName', 'profileUrl'],
-          as: 'issueAuthor',
-        },
-        {
-          model: db.label,
-          attributes: ['id', 'name', 'color'],
-          where: {
-            id: filterData.label || { [Op.not]: null },
-          },
-        },
-        {
-          model: db.user,
-          attributes: ['id', 'profileUrl'],
-          as: 'assignees',
-          where: {
-            id: filterData.assignee || { [Op.not]: null },
-          },
-        },
-        {
-          model: db.comment,
-          where: {
-            author: filterData.commented || { [Op.not]: null },
-          },
-        },
-        db.milestone,
-      ],
+      include: includeData,
     });
-
+    IssueModel.issueFormatter(issues);
     return IssueModel.labelFilter(issues, filterData.label);
   }
 
-  static readIssueDetail(issueId) {
+  static read(id) {
     return db.issue.findOne({
-      where: { id: issueId },
+      where: { id },
       include: [
         {
           model: db.user,
@@ -67,13 +80,13 @@ class IssueModel {
     });
   }
 
-  static updateIssueDetail(updateIssueData) {
-    // updateIssueData: id, title, description, milestoneId
+  static update(updateIssueData) {
     return db.issue.update(
       {
         title: updateIssueData.title,
         description: updateIssueData.description,
         milestoneId: updateIssueData.milestoneId,
+        closedAt: updateIssueData.closedAt,
       },
       { where: { id: updateIssueData.id } }
     );
@@ -93,13 +106,6 @@ class IssueModel {
     return resultArray;
   }
 
-  static updateOpenState(issueId, isOpen) {
-    const openState = isOpen
-      ? null
-      : new Date().toISOString().slice(0, 19).replace('T', ' ');
-    return db.issue.update({ closedAt: openState }, { where: { id: issueId } });
-  }
-
   static makeFilter(repositoryId, filterData) {
     const filter = {
       repositoryId,
@@ -117,16 +123,39 @@ class IssueModel {
       ],
     };
     if (filterData.isOpen !== undefined)
-      filter.closedAt = filterData.isOpen ? null : { [Op.not]: null };
+      filter.closedAt =
+        filterData.isOpen === 'true' ? null : { [Op.not]: null };
     if (filterData.author !== undefined) filter.author = filterData.author;
     if (filterData.milestoneId !== undefined)
       filter.milestoneId = filterData.milestoneId;
     return filter;
   }
 
-  static labelFilter(issues, filterLabel) {
+  static issueFormatter(issues) {
+    issues.forEach((issue) => {
+      if (!issue.labels) issue.labels = [];
+      if (!issue.assignees) issue.assignees = [];
+      if (!issue.milestone) issue.milestone = [];
+    });
+  }
+
+  static async labelFilter(issues, filterLabel) {
+    if (!filterLabel) return issues;
+
+    const labelArray =
+      typeof filterLabel === 'string'
+        ? [+filterLabel]
+        : filterLabel.map((label) => +label);
+
     return issues.filter((issue) => {
-      return filterLabel ? issue.labels.length >= filterLabel.length : true;
+      const labels = [...labelArray];
+
+      return issue.labels.some((label) => {
+        const index = labels.indexOf(label.id);
+        if (index > -1) labels.splice(index, 1);
+        if (labels.length === 0) return true;
+        return false;
+      });
     });
   }
 }
