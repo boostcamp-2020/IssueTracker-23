@@ -37,11 +37,8 @@ router
   .put('/', async (req, res) => {
     try {
       const issueData = req.body;
-      const issueId = await issueService.update(issueData);
-      if (issueId)
-        res
-          .status(resCode.OK)
-          .json({ message: 'Success', data: { id: issueId } });
+      const { id } = await issueService.update(issueData);
+      if (id) res.status(resCode.OK).json({ message: 'Success', data: { id } });
       else res.status(resCode.NOT_FOUND).send('fail');
     } catch (err) {
       res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
