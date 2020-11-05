@@ -36,7 +36,7 @@ router
       res.status(resCode.INTERNAL_SERVER_ERROR).send('fail');
     }
   })
-  .patch('/:repositoryId/:labelId', async (req, res) => {
+  .delete('/:repositoryId/:labelId', async (req, res) => {
     try {
       const { labelId } = req.params;
       const deleteId = await labelService.delete(labelId);
