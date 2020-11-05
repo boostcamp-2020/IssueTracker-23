@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
+const CommentModel = require('../models/comment');
 const IssueModel = require('../models/issue');
+const MilestoneModel = require('../models/milestone');
 
 class IssueService {
   static async create(repositoryId, issueData) {
@@ -70,7 +72,19 @@ class IssueService {
         profileUrl: assignee.profileUrl,
       };
     });
-
+    const comments = await CommentModel.readCommentsByIssueId(issueId);
+    const commentList = comments.map((comment) => {
+      return {
+        author: {
+          id: comment.commentAuthor.id,
+          userName: comment.commentAuthor.userName,
+          profileUrl: comment.commentAuthor.profileUrl,
+        },
+        createdAt: comment.createdAt,
+        updatedAt: comment.updatedAt,
+        description: comment.description,
+      };
+    });
     return {
       title: issue.title,
       description: issue.description,
@@ -85,8 +99,7 @@ class IssueService {
       issueNumber: issue.issueNumber,
       labels: labelList,
       assignees: assigneeList,
-      milestoneId: issue.milestoneId, // milestone에서 불러와야..
-      comments: issue.commentList, // comment에서 불러와야...
+      comments: commentList,
     };
   }
 
