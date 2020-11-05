@@ -46,9 +46,9 @@ class IssueModel {
     return IssueModel.labelFilter(issues, filterData.label);
   }
 
-  static readIssueDetail(repositoryId, issueNumber) {
+  static readIssueDetail(issueId) {
     return db.issue.findOne({
-      where: { issueNumber, repositoryId },
+      where: { issueId },
       include: [
         {
           model: db.user,
