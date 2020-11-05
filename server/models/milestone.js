@@ -13,7 +13,7 @@ class MilestoneModel {
     FROM milestone A 
     LEFT join issue B
     ON A.id = B.milestone_id
-    WHERE A.repository_id = 1 AND A.deleted_at IS NULL AND B.deleted_at IS NULL
+    WHERE A.repository_id = :repository_id AND A.deleted_at IS NULL AND B.deleted_at IS NULL
     GROUP by A.id`;
 
     return model.sequelize.query(query, {
