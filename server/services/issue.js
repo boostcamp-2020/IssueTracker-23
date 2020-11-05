@@ -53,8 +53,8 @@ class IssueService {
     return { repositoryId, issueList: issueArray };
   }
 
-  static async readOne(repositoryId, issueNumber) {
-    const issue = await IssueModel.readIssueDetail(repositoryId, issueNumber);
+  static async readOne(issueId) {
+    const issue = await IssueModel.readIssueDetail(issueId);
     const author = issue.issueAuthor;
     const labelList = issue.labels.map((label) => {
       return {
@@ -90,7 +90,7 @@ class IssueService {
     };
   }
 
-  static async updateDeatil(repositoryId, issueData) {
+  static async updateDetail(issueData) {
     // id,title,description,assignees:[],labels:[],milestoneId
     const [count] = await IssueModel.updateIssueDetail(issueData);
     if (issueData.assiginnes)
