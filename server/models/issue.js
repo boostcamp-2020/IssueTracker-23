@@ -33,10 +33,6 @@ class IssueModel {
       includeAuthor.where = {
         id: filterData.author,
       };
-    if (filterData.assignee)
-      includeAssignee.where = {
-        id: filterData.assignee,
-      };
     if (filterData.commented)
       includeCommented.where = {
         author: filterData.commented,
@@ -56,7 +52,11 @@ class IssueModel {
       include: includeData,
     });
     IssueModel.issueFormatter(issues);
-    return IssueModel.labelFilter(issues, filterData.label);
+    const labelFilteredIssues = await IssueModel.labelFilter(
+      issues,
+      filterData.label
+    );
+    return IssueModel.assigneeFilter(labelFilteredIssues, filterData.assignee);
   }
 
   static read(id) {
@@ -156,6 +156,15 @@ class IssueModel {
         if (labels.length === 0) return true;
         return false;
       });
+    });
+  }
+
+  static async assigneeFilter(issues, assigneeId) {
+    if (!assigneeId) return issues;
+    return issues.filter((issue) => {
+      return issue.assignees
+        .map((assignee) => assignee.id)
+        .includes(assigneeId);
     });
   }
 }
