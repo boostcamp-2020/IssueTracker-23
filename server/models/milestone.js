@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+
 const db = require('../db/models').milestone;
 const model = require('../db/models');
 
@@ -12,11 +13,38 @@ class MilestoneModel {
     FROM milestone A 
     LEFT join issue B
     ON A.id = B.milestone_id
-    WHERE A.repository_id = :repository_id
+    WHERE A.repository_id = :repository_id AND A.deleted_at IS NULL AND B.deleted_at IS NULL
     GROUP by A.id`;
 
     return model.sequelize.query(query, {
       replacements: { repository_id: repositoryId },
+      type: model.Sequelize.QueryTypes.SELECT,
+      raw: true,
+    });
+  }
+
+  static async readOne(milestoneId) {
+    return db.findOne({
+      attributes: [
+        'id',
+        'title',
+        'dueDate',
+        [
+          model.sequelize.fn('COUNT', model.sequelize.col('issues.id')),
+          'nTotal',
+        ],
+        [
+          model.sequelize.fn('COUNT', model.sequelize.col('issues.closed_at')),
+          'nClose',
+        ],
+      ],
+      include: [
+        {
+          model: model.issue,
+          attributes: [],
+        },
+      ],
+      where: { id: milestoneId },
     });
   }
 
