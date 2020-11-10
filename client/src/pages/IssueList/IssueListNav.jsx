@@ -1,13 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import DefaultButton from '../../components/DefaultButton';
-import DropdownCaret from '../../components/DropdownCaret';
-
-const FilterButton = styled(DefaultButton)`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  font-size: 14px;
-`;
+import FilterDropdown from './FilterDropdown.jsx';
 
 const SearchBar = styled.input`
   width: 100%;
@@ -67,10 +61,7 @@ const IssueListNav = () => {
   return (
     <FlexContainerJustifyBetween>
       <FlexContainerWidthFull>
-        <FilterButton>
-          Filters
-          <DropdownCaret />
-        </FilterButton>
+        <FilterDropdown />
         <SearchBar />
         <FlexContainer margin={'0 0 0 16px'}>
           <LabelLink buttonColor={'white'}>
