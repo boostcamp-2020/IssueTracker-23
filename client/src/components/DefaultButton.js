@@ -14,6 +14,7 @@ const DefaultButton = styled.button`
   color: ${(props) => props.textColor || defaultTextColor};
   cursor: pointer;
   white-space: nowrap;
+  outline: none;
 `;
 
 export default DefaultButton;
