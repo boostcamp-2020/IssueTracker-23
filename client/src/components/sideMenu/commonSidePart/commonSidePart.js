@@ -8,7 +8,6 @@ const CommonSidePartStyle = styled.div`
   width: 300px;
   height: 30px;
   position: relative;
-  border: 1px black solid;
   box-sizing: border-box;
   cursor: pointer;
   font-size: 14px;
@@ -29,12 +28,27 @@ const CommonSidePartStyle = styled.div`
 
 const CommonSidePart = (props) => {
   const [open, setOpen] = useState(false);
+
   const clickHandler = (e) => {
+    const clickedValue = e.target.innerText.split('\n')[0];
     setOpen(!open);
     if (e.target.tagName === 'LI') {
-      const clickedItem = props.valueAsTitle.filter(
-        (elem) => elem.userName === e.target.innerText
-      );
+      let clickedItem = [];
+      if (props.title === 'Assignees') {
+        clickedItem = props.valueAsTitle.filter(
+          (elem) => elem.userName === clickedValue
+        );
+      }
+      if (props.title === 'Labels' || props.title === 'Milestones') {
+        clickedItem = props.valueAsTitle.filter(
+          (elem) => elem.name === clickedValue
+        );
+      }
+      if (props.title === 'Milestones') {
+        clickedItem = props.valueAsTitle.filter(
+          (elem) => elem.name === clickedValue
+        );
+      }
       props.onClick(clickedItem[0]);
     }
   };
@@ -45,7 +59,7 @@ const CommonSidePart = (props) => {
         {props.title}
         <WheelIcon width="16" height="16" />
       </p>
-      <DropDown values={props.valueAsTitle} isOpen={open} type="assignees" />
+      <DropDown values={props.valueAsTitle} isOpen={open} type={props.title} />
     </CommonSidePartStyle>
   );
 };
