@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 
-const defaultButtonColor = '#fafbfc';
-const defaultButtonTextColor = 'black';
+const defaultBackgroundColor = '#fafbfc';
+const defaultTextColor = 'black';
 const defaultBorderColor = '#d1d5da';
 
 const DefaultButton = styled.button`
   padding: 5px 16px;
   border: 1px solid ${(props) => props.borderColor || defaultBorderColor};
   border-radius: 6px;
-  background-color: ${(props) => props.buttonColor || defaultButtonColor};
+  background-color: ${(props) =>
+    props.backgroundColor || defaultBackgroundColor};
   font-weight: 500;
-  font-color: ${(props) => props.buttonTextColor || defaultButtonTextColor};
+  color: ${(props) => props.textColor || defaultTextColor};
+  cursor: pointer;
+  white-space: nowrap;
 `;
 
 export default DefaultButton;
