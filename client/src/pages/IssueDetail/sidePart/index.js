@@ -8,7 +8,7 @@ const SidePart = () => {
     <div>
       <SideAssigneePart />
       <SideLabelPart />
-      {/* <SideMilestonePart /> */}
+      <SideMilestonePart />
     </div>
   );
 };

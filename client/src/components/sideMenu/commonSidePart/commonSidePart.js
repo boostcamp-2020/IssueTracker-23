@@ -40,7 +40,12 @@ const CommonSidePart = (props) => {
           (elem) => elem.userName === clickedValue
         );
       }
-      if (props.title === 'Labels') {
+      if (props.title === 'Labels' || props.title === 'Milestones') {
+        clickedItem = props.valueAsTitle.filter(
+          (elem) => elem.name === clickedValue
+        );
+      }
+      if (props.title === 'Milestones') {
         clickedItem = props.valueAsTitle.filter(
           (elem) => elem.name === clickedValue
         );

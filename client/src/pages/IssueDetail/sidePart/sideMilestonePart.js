@@ -1,11 +1,51 @@
-import React from 'react';
+/* eslint-disable import/no-unresolved */
+import React, { useState } from 'react';
 import CommonSidePart from '@Components/sideMenu/commonSidePart';
+import MilestonePart from '@Components/sideMenu/milestonePart';
+import styled from 'styled-components';
+
+const MilestoneStyle = styled.div`
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+`;
 
 const SideMilestonePart = () => {
+  const [milestone, setMilestone] = useState('');
+
+  const clickItmeHandler = (clickedItem) => {
+    if (milestone.id === clickedItem.id) setMilestone('');
+    else setMilestone(clickedItem);
+  };
   return (
-    <div>
-      <CommonSidePart title="Milestones" />
-    </div>
+    <MilestoneStyle>
+      <CommonSidePart
+        onClick={clickItmeHandler}
+        title="Milestones"
+        valueAsTitle={[
+          {
+            id: 1,
+            name: 'milestone1',
+            description: 'this is milestone1',
+            dueDate: null,
+            totalNumber: 3,
+            closedNumber: 2,
+          },
+          {
+            id: 2,
+            name: 'milestone2',
+            description: 'this is milestone2',
+            dueDate: '2020-11-10',
+            totalNumber: 5,
+            closedNumber: 3,
+          },
+        ]}
+      />
+      {[milestone].map((elem, index) => {
+        return <MilestonePart key={index} value={elem} />;
+      })}
+    </MilestoneStyle>
   );
 };
 
