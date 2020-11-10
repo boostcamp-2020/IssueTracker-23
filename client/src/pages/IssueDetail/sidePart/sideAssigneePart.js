@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import CommonSidePart from '@Components/sideMenu/commonSidePart';
 import AssigneePart from '@Components/sideMenu/assigneePart';
 
-const SideAssignPart = () => {
+const SideAssigneePart = () => {
   const [assignedUser, setAssignedUser] = useState([]);
 
-  const clickedItem = (clickedItem) => {
+  const clickItmeHandler = (clickedItem) => {
     const clickedIndex = assignedUser.findIndex(
       (elem) => elem.id === clickedItem.id
     );
@@ -23,7 +23,7 @@ const SideAssignPart = () => {
     <div>
       <CommonSidePart
         title="Assignees"
-        onClick={clickedItem}
+        onClick={clickItmeHandler}
         valueAsTitle={[
           {
             id: 'test_id1',
@@ -46,4 +46,4 @@ const SideAssignPart = () => {
   );
 };
 
-export default SideAssignPart;
+export default SideAssigneePart;
