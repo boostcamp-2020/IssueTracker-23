@@ -11,6 +11,7 @@ const DropDownStyle = styled.ul`
   top: 20px;
   padding: 0;
   background-color: white;
+  z-index: 1;
   & > li {
     box-sizing: border-box;
     padding: 8px;
@@ -23,7 +24,8 @@ const DropDownStyle = styled.ul`
 `;
 
 const ValueAsTitle = (props) => {
-  if (props.type === 'assignees') return <li>{props.value.userName}</li>;
+  if (props.type === 'Assignees') return <li>{props.value.userName}</li>; // 사진 추가해야 함
+  if (props.type === 'Labels') return <li>{props.value.name}</li>;
   return null;
 };
 
