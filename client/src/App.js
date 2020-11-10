@@ -1,11 +1,11 @@
 import React from 'react';
-import IssueDetailPage from './pages/IssueDetail';
+import SidePart from './pages/IssueDetail/sidePart';
 
 const App = () => {
   return (
     <div>
       Hello, Issue Tracker!
-      <IssueDetailPage />
+      <SidePart />
     </div>
   );
 };
