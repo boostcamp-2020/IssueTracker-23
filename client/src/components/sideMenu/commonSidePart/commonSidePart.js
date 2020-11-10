@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
 import WheelIcon from '@Public/wheelIcon.svg';
 import styled from 'styled-components';
+import DropDown from '../../dropDown';
 
 const CommonSidePartStyle = styled.div`
-  width: 200px;
+  width: 300px;
   height: 30px;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  border: 1px black solid;
+  box-sizing: border-box;
   cursor: pointer;
-  margin: 0;
   font-size: 14px;
-  line-height: 18px;
-  :hover {
-    & > p,
-    svg {
+  line-height: 16px;
+  p,
+  svg {
+    padding: 3px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    :hover {
       color: rgb(99, 164, 255);
       fill: rgb(99, 164, 255);
     }
   }
 `;
 
-const CommonSidePart = ({ title }) => {
+const CommonSidePart = ({ title, valueAsTitle }) => {
+  const [open, setOpen] = useState(false);
   return (
-    <CommonSidePartStyle>
-      <p>{title}</p>
-      <WheelIcon width="16" height="16" />
+    <CommonSidePartStyle onClick={() => setOpen(!open)}>
+      <p>
+        {title}
+        <WheelIcon width="16" height="16" />
+      </p>
+      <DropDown values={valueAsTitle} isOpen={open} />
     </CommonSidePartStyle>
   );
 };
