@@ -31,17 +31,18 @@ const CommonSidePart = (props) => {
   const [open, setOpen] = useState(false);
 
   const clickHandler = (e) => {
+    const clickedValue = e.target.innerText.split('\n')[0];
     setOpen(!open);
     if (e.target.tagName === 'LI') {
       let clickedItem = [];
       if (props.title === 'Assignees') {
         clickedItem = props.valueAsTitle.filter(
-          (elem) => elem.userName === e.target.innerText
+          (elem) => elem.userName === clickedValue
         );
       }
       if (props.title === 'Labels') {
         clickedItem = props.valueAsTitle.filter(
-          (elem) => elem.name === e.target.innerText
+          (elem) => elem.name === clickedValue
         );
       }
       props.onClick(clickedItem[0]);

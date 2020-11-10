@@ -48,8 +48,8 @@ const SideAssigneePart = () => {
         ]}
       />
       <AssigneeListStyle>
-        {assignedUser.map((elem) => {
-          return <AssigneePart key={elem.id} value={elem} />;
+        {assignedUser.map((elem, index) => {
+          return <AssigneePart key={index} value={elem} />;
         })}
       </AssigneeListStyle>
     </div>

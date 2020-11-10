@@ -12,20 +12,69 @@ const DropDownStyle = styled.ul`
   padding: 0;
   background-color: white;
   z-index: 1;
+  font-size: 14px;
+  line-height: 14px;
   & > li {
     box-sizing: border-box;
     padding: 8px;
     width: 250px;
-    height: 40px;
+    height: auto;
     :hover {
       background-color: rgb(230, 232, 235);
     }
   }
 `;
 
+const AssigneeItemStyle = styled.li`
+  & > img {
+    pointer-events: none;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+  }
+`;
+const LabelDescStyle = styled.span`
+  pointer-events: none;
+  font-size: 12px;
+  line-height: 12px;
+  margin: 4px 0 0 0;
+`;
+
+const LabelItemStyle = styled.li`
+  display: flex;
+  flex-direction: column;
+  div {
+    pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    div {
+      margin-right: 4px;
+      width: 14px;
+      height: 14px;
+      border: 1px black none;
+      border-radius: 100%;
+    }
+  }
+`;
+
 const ValueAsTitle = (props) => {
-  if (props.type === 'Assignees') return <li>{props.value.userName}</li>; // 사진 추가해야 함
-  if (props.type === 'Labels') return <li>{props.value.name}</li>;
+  if (props.type === 'Assignees')
+    return (
+      <AssigneeItemStyle>
+        <img src={props.value.profileUrl} alt={`user's profile`} />
+        {props.value.userName}
+      </AssigneeItemStyle>
+    );
+  if (props.type === 'Labels')
+    return (
+      <LabelItemStyle>
+        <div>
+          <div style={{ backgroundColor: props.value.color }}></div>
+          {props.value.name}
+        </div>
+        <LabelDescStyle>{props.value.description}</LabelDescStyle>
+      </LabelItemStyle>
+    );
   return null;
 };
 
@@ -33,8 +82,8 @@ const DropDown = (props) => {
   if (props.isOpen) {
     return (
       <DropDownStyle>
-        {props.values.map((elem) => (
-          <ValueAsTitle key={elem.id} value={elem} type={props.type} />
+        {props.values.map((elem, index) => (
+          <ValueAsTitle key={index} value={elem} type={props.type} />
         ))}
       </DropDownStyle>
     );

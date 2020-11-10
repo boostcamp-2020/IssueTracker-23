@@ -27,7 +27,6 @@ const SideLabelPart = () => {
     }
     setLabelList(newList);
   };
-
   return (
     <div>
       <CommonSidePart
@@ -38,22 +37,25 @@ const SideLabelPart = () => {
             id: 1,
             name: 'label1',
             color: '#adffdd',
+            description: 'this is label1',
           },
           {
             id: 2,
             name: 'label2',
             color: '#f5ffb5',
+            description: 'this is label2',
           },
           {
             id: 3,
             name: 'label3',
             color: '#f5cbae',
+            description: 'this is label3',
           },
         ]}
       />
       <LabelListStyle>
-        {labelList.map((elem) => {
-          return <LabelPart key={elem.id} value={elem} />;
+        {labelList.map((elem, index) => {
+          return <LabelPart key={index} value={elem} />;
         })}
       </LabelListStyle>
     </div>
