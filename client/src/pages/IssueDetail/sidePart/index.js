@@ -1,12 +1,12 @@
 import React from 'react';
-import SideAssignPart from './sideAssignPart';
+import SideAssigneePart from './sideAssigneePart';
 import SideLabelPart from './sideLabelPart';
 import SideMilestonePart from './sideMilestonePart';
 
 const SidePart = () => {
   return (
     <div>
-      <SideAssignPart />
+      <SideAssigneePart />
       {/* <SideLabelPart />
       <SideMilestonePart /> */}
     </div>

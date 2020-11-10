@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CommonSidePart from '@Components/sideMenu/commonSidePart';
 import AssigneePart from '@Components/sideMenu/assigneePart';
 
-const SideAssignPart = () => {
+const SideAssigneePart = () => {
   const [assignedUser, setAssignedUser] = useState([]);
 
   const clickItmeHandler = (clickedItem) => {
@@ -46,4 +46,4 @@ const SideAssignPart = () => {
   );
 };
 
-export default SideAssignPart;
+export default SideAssigneePart;
