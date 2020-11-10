@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import CommonSidePart from '@Components/sideMenu/commonSidePart';
 // import AssigneePart from '@Components/sideMenu/assigneePart';

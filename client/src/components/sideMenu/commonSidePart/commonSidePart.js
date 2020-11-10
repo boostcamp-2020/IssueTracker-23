@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import WheelIcon from '@Public/wheelIcon.svg';
 import styled from 'styled-components';
@@ -12,9 +13,9 @@ const CommonSidePartStyle = styled.div`
   cursor: pointer;
   font-size: 14px;
   line-height: 16px;
+  padding: 4px 4px;
   p,
   svg {
-    padding: 3px 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
