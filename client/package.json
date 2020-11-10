@@ -30,6 +30,8 @@
     "html-webpack-plugin": "^4.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-svg-loader": "^3.0.3",
+    "styled-components": "^5.2.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }
