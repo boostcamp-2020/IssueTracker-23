@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import WheelIcon from '../../../public/wheelIcon.svg';
+import WheelIcon from '@Public/wheelIcon.svg';
 import styled from 'styled-components';
 
 const CommonSidePartStyle = styled.div`
