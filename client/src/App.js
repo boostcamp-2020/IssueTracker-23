@@ -1,3 +1,12 @@
 import React from 'react';
-const App = () => <div>Hello, Issue Tracker!</div>;
+import IssueDetailPage from './pages/IssueDetail';
+
+const App = () => {
+  return (
+    <div>
+      Hello, Issue Tracker!
+      <IssueDetailPage />
+    </div>
+  );
+};
 export default App;
