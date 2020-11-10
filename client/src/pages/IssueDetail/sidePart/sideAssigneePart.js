@@ -2,6 +2,14 @@
 import React, { useState } from 'react';
 import CommonSidePart from '@Components/sideMenu/commonSidePart';
 import AssigneePart from '@Components/sideMenu/assigneePart';
+import styled from 'styled-components';
+
+const AssigneeListStyle = styled.div`
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+`;
 
 const SideAssigneePart = () => {
   const [assignedUser, setAssignedUser] = useState([]); // 여기에 assignee 불러와야함
@@ -39,9 +47,11 @@ const SideAssigneePart = () => {
           },
         ]}
       />
-      {assignedUser.map((elem) => {
-        return <AssigneePart key={elem.id} value={elem} />;
-      })}
+      <AssigneeListStyle>
+        {assignedUser.map((elem) => {
+          return <AssigneePart key={elem.id} value={elem} />;
+        })}
+      </AssigneeListStyle>
     </div>
   );
 };

@@ -2,26 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LabelPartStyle = styled.div`
-  width: 200px;
+  width: 45%;
   height: 30px;
-  margin: 0;
+  margin: 2px 5px;
   display: flex;
+  box-sizing: border-box;
   align-items: center;
-  cursor: pointer;
-  margin: 0;
+  text-align: center;
   font-size: 14px;
   line-height: 18px;
-  & > img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+  border: 1px black solid;
+  border-radius: 2em;
+  > div {
+    margin: auto;
   }
 `;
 
 const LabelPart = (props) => {
   return (
-    <LabelPartStyle>
-      <div background-color={props.value.color}>{props.value.name}</div>
+    <LabelPartStyle style={{ backgroundColor: props.value.color }}>
+      <div>{props.value.name}</div>
     </LabelPartStyle>
   );
 };

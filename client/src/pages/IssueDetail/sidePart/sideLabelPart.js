@@ -2,6 +2,15 @@
 import React, { useState } from 'react';
 import CommonSidePart from '@Components/sideMenu/commonSidePart';
 import LabelPart from '@Components/sideMenu/labelPart';
+import styled from 'styled-components';
+
+const LabelListStyle = styled.div`
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 const SideLabelPart = () => {
   const [labelList, setLabelList] = useState([]); // 여기에 갖고 있는 라벨 받아오기
@@ -42,9 +51,11 @@ const SideLabelPart = () => {
           },
         ]}
       />
-      {labelList.map((elem) => {
-        return <LabelPart key={elem.id} value={elem} />;
-      })}
+      <LabelListStyle>
+        {labelList.map((elem) => {
+          return <LabelPart key={elem.id} value={elem} />;
+        })}
+      </LabelListStyle>
     </div>
   );
 };

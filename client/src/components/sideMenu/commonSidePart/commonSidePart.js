@@ -28,7 +28,6 @@ const CommonSidePartStyle = styled.div`
 `;
 
 const CommonSidePart = (props) => {
-  console.log(props);
   const [open, setOpen] = useState(false);
 
   const clickHandler = (e) => {
