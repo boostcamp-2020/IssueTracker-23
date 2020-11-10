@@ -19,10 +19,7 @@ const FilterDropdown = () => {
   const [isFilterOpened, setIsFilterOpened] = useState(false);
 
   const dropdownHandler = () => setIsFilterOpened(!isFilterOpened);
-  const closeDropdownHandler = () => {
-    setIsFilterOpened(false);
-    console.log(isFilterOpened);
-  };
+  const closeDropdownHandler = () => setIsFilterOpened(false);
 
   return (
     <div>
