@@ -1,26 +1,47 @@
 /* eslint-disable import/no-unresolved */
-import React from 'react';
+import React, { useState } from 'react';
 import CommonSidePart from '@Components/sideMenu/commonSidePart';
-// import AssigneePart from '@Components/sideMenu/assigneePart';
+import AssigneePart from '@Components/sideMenu/assigneePart';
 
 const SideAssignPart = () => {
+  const [assignedUser, setAssignedUser] = useState([]);
+
+  const clickedItem = (clickedItem) => {
+    const clickedIndex = assignedUser.findIndex(
+      (elem) => elem.id === clickedItem.id
+    );
+    const newList = [...assignedUser];
+    if (clickedIndex !== -1) {
+      newList.splice(clickedIndex, 1);
+    } else {
+      newList.push(clickedItem);
+    }
+    setAssignedUser(newList);
+  };
+
   return (
     <div>
       <CommonSidePart
         title="Assignees"
+        onClick={clickedItem}
         valueAsTitle={[
-          ['test_id1', 'tester1'],
-          ['test_id2', 'tester2'],
+          {
+            id: 'test_id1',
+            userName: 'tester1',
+            profileUrl:
+              'https://github.githubassets.com/images/modules/logos_page/Octocat.png',
+          },
+          {
+            id: 'test_id2',
+            userName: 'tester2',
+            profileUrl:
+              'https://github.githubassets.com/images/modules/logos_page/Octocat.png',
+          },
         ]}
       />
-      {/* <AssigneePart
-        userName="JBJ"
-        url="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
-      />
-      <AssigneePart
-        userName="BLAH1"
-        url="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
-      /> */}
+      {assignedUser.map((elem) => {
+        return <AssigneePart key={elem.id} value={elem} />;
+      })}
     </div>
   );
 };

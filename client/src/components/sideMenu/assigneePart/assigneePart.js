@@ -18,11 +18,11 @@ const AssingeePartStyle = styled.div`
   }
 `;
 
-const AssigneePart = ({ url, userName }) => {
+const AssigneePart = (props) => {
   return (
     <AssingeePartStyle>
-      <img src={url} />
-      <label>{userName}</label>
+      <img src={props.value.profileUrl} alt={`user's profile`} />
+      <label>{props.value.userName}</label>
     </AssingeePartStyle>
   );
 };

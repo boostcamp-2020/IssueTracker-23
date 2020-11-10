@@ -27,15 +27,25 @@ const CommonSidePartStyle = styled.div`
   }
 `;
 
-const CommonSidePart = ({ title, valueAsTitle }) => {
+const CommonSidePart = (props) => {
   const [open, setOpen] = useState(false);
+  const clickHandler = (e) => {
+    setOpen(!open);
+    if (e.target.tagName === 'LI') {
+      const clickedItem = props.valueAsTitle.filter(
+        (elem) => elem.userName === e.target.innerText
+      );
+      props.onClick(clickedItem[0]);
+    }
+  };
+
   return (
-    <CommonSidePartStyle onClick={() => setOpen(!open)}>
+    <CommonSidePartStyle onClick={clickHandler}>
       <p>
-        {title}
+        {props.title}
         <WheelIcon width="16" height="16" />
       </p>
-      <DropDown values={valueAsTitle} isOpen={open} />
+      <DropDown values={props.valueAsTitle} isOpen={open} type="assignees" />
     </CommonSidePartStyle>
   );
 };

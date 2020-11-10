@@ -10,6 +10,7 @@ const DropDownStyle = styled.ul`
   left: 47px;
   top: 20px;
   padding: 0;
+  background-color: white;
   & > li {
     box-sizing: border-box;
     padding: 8px;
@@ -21,17 +22,17 @@ const DropDownStyle = styled.ul`
   }
 `;
 
-const ValueAsTitle = ({ value }) => {
-  console.log('val', value[1]);
-  return <li>{value[1]}</li>;
+const ValueAsTitle = (props) => {
+  if (props.type === 'assignees') return <li>{props.value.userName}</li>;
+  return null;
 };
 
-const DropDown = ({ isOpen, values }) => {
-  if (isOpen) {
+const DropDown = (props) => {
+  if (props.isOpen) {
     return (
       <DropDownStyle>
-        {values.map((elem) => (
-          <ValueAsTitle key={elem[0]} value={elem} />
+        {props.values.map((elem) => (
+          <ValueAsTitle key={elem.id} value={elem} type={props.type} />
         ))}
       </DropDownStyle>
     );
