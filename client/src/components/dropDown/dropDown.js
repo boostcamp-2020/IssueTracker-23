@@ -5,7 +5,7 @@ const DropDownStyle = styled.ul`
   list-style: none;
   cursor: pointer;
   position: absolute;
-  border: 1px black solid;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   box-sizing: border-box;
   left: 47px;
   top: 20px;
@@ -51,7 +51,6 @@ const LabelItemStyle = styled.li`
       margin-right: 4px;
       width: 14px;
       height: 14px;
-      border: 1px black none;
       border-radius: 100%;
     }
   }

@@ -5,7 +5,8 @@ import LabelPart from '@Components/sideMenu/labelPart';
 import styled from 'styled-components';
 
 const LabelListStyle = styled.div`
-  width: 300px;
+  width: 100%;
+  min-height: 75px;
   height: auto;
   display: flex;
   flex-direction: row;

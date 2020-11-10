@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const AssingeePartStyle = styled.div`
   width: 100%;
   height: 30px;
+  padding: 4px;
+  box-sizing: border-box;
   margin: 0;
   display: flex;
   align-items: center;
@@ -11,8 +13,9 @@ const AssingeePartStyle = styled.div`
   font-size: 14px;
   line-height: 18px;
   & > img {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
     margin-right: 10px;
   }
 `;

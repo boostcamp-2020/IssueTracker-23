@@ -5,7 +5,8 @@ import AssigneePart from '@Components/sideMenu/assigneePart';
 import styled from 'styled-components';
 
 const AssigneeListStyle = styled.div`
-  width: 300px;
+  width: 100%;
+  min-height: 75px;
   height: auto;
   display: flex;
   flex-direction: column;

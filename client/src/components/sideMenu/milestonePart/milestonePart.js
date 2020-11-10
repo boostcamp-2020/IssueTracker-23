@@ -15,6 +15,8 @@ const MilestonePartStyle = styled.div`
     }
   }
   > p {
+    font-size: 14px;
+    line-height: 14px;
     margin: 4px 0 0 0;
   }
 `;
