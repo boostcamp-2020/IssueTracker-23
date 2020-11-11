@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import DropDown from './dropDown.jsx';
 
 const CommonSidePartStyle = styled.div`
-  width: 300px;
-  height: 30px;
+  width: 100%;
+  height: auto;
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
   font-size: 14px;
   line-height: 16px;
-  padding: 4px 4px;
+  padding: 12px 8px 8px 8px;
   p,
   svg {
     display: flex;

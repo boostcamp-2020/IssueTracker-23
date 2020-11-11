@@ -5,12 +5,14 @@ import LabelPart from '@Components/LabelInDetail.jsx';
 import styled from 'styled-components';
 
 const LabelListStyle = styled.div`
+  padding: 4px;
   width: 100%;
   min-height: 75px;
   height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  border-bottom: 1px solid gray;
 `;
 
 const SideLabelPart = () => {

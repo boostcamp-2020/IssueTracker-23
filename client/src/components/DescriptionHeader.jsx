@@ -44,18 +44,22 @@ const EditBtnStyle = styled.button`
 
 const DescriptionHeader = (props) => {
   const issueInfo = props.value;
+  const headerColor = props.isOwner
+    ? 'rgb(232, 245, 255)'
+    : 'rgb(255, 245, 249)';
+
   const IsOwner = () => {
     if (props.isOwner) return <IsOwnerStyle>owner</IsOwnerStyle>;
     return <IsOwnerStyle style={{ visibility: 'hidden' }}>owner</IsOwnerStyle>;
   };
-  console.log(issueInfo, props.isOwner);
+
   return (
-    <DescriptionHeaderStyle>
+    <DescriptionHeaderStyle style={{ backgroundColor: headerColor }}>
       <TimelineStyle>
         {issueInfo.author.userName} Commented at {issueInfo.updatedDate}
       </TimelineStyle>
       <IsOwner />
-      <EditBtnStyle>edit</EditBtnStyle>
+      <EditBtnStyle style={{ backgroundColor: headerColor }}>edit</EditBtnStyle>
     </DescriptionHeaderStyle>
   );
 };

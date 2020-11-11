@@ -10,6 +10,7 @@ const AssigneeListStyle = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid gray;
 `;
 
 const SideAssigneePart = () => {

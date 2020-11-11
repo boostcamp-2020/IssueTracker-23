@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import DescriptionHeader from '@Components/DescriptionHeader';
+import IssueDetailItem from './IssueDetailItem.jsx';
 
 const dummyData = {
   title: 'title1',
@@ -43,24 +43,26 @@ const dummyData = {
 };
 
 const IssueDetailPartStyle = styled.div`
-  position: fixed;
+  position: relative;
   width: 65%;
   top: 90px;
   left: 5%;
+  hr {
+    margin: 0;
+    border: 1px solid black;
+  }
 `;
 
 const IssueDetailPart = () => {
   // issue detail 정보 불러오기
   const [issueInfo, setIssueInfo] = useState(dummyData);
-  console.log(issueInfo, issueInfo.comments);
   return (
     <IssueDetailPartStyle>
-      <DescriptionHeader isOwner={true} value={issueInfo} />
-      <div>
-        {issueInfo.comments.map((elem, index) => (
-          <DescriptionHeader isOwner={false} key={index} value={elem} />
-        ))}
-      </div>
+      <IssueDetailItem isOwner={true} value={issueInfo} />
+      {issueInfo.comments.map((elem, index) => (
+        <IssueDetailItem key={index} isOwner={false} value={elem} />
+      ))}
+      <hr />
     </IssueDetailPartStyle>
   );
 };
