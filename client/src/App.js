@@ -1,11 +1,13 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
-import SidePart from './pages/IssueDetail/sidePart';
+import Header from '@Components/header';
+import IssueDetail from '@Pages/IssueDetail';
 
 const App = () => {
   return (
     <div>
-      Hello, Issue Tracker!
-      <SidePart />
+      <Header />
+      <IssueDetail />
     </div>
   );
 };

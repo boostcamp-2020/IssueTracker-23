@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import CommonSidePart from '@Components/sideMenu/commonSidePart';
-import AssigneePart from '@Components/sideMenu/assigneePart';
+import CommonSidePart from '@Components/CommonSidePart.jsx';
+import AssigneePart from '@Components/AssigneeInDetail.jsx';
 import styled from 'styled-components';
 
 const AssigneeListStyle = styled.div`

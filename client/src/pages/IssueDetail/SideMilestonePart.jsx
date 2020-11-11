@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import CommonSidePart from '@Components/sideMenu/commonSidePart';
-import MilestonePart from '@Components/sideMenu/milestonePart';
+import CommonSidePart from '@Components/CommonSidePart.jsx';
+import MilestonePart from '@Components/MilestoneInDetail.jsx';
 import styled from 'styled-components';
 
 const MilestoneStyle = styled.div`
