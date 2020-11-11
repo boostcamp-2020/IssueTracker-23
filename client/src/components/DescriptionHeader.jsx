@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const DescriptionHeaderStyle = styled.div`
@@ -43,19 +43,20 @@ const EditBtnStyle = styled.button`
 `;
 
 const DescriptionHeader = (props) => {
+  const [color, setColor] = useState('rgb(232, 245, 255)');
   const issueInfo = props.value;
   const IsOwner = () => {
     if (props.isOwner) return <IsOwnerStyle>owner</IsOwnerStyle>;
+    setColor('rgb(255, 245, 249)');
     return <IsOwnerStyle style={{ visibility: 'hidden' }}>owner</IsOwnerStyle>;
   };
-  console.log(issueInfo, props.isOwner);
   return (
-    <DescriptionHeaderStyle>
+    <DescriptionHeaderStyle style={{ backgroundColor: color }}>
       <TimelineStyle>
         {issueInfo.author.userName} Commented at {issueInfo.updatedDate}
       </TimelineStyle>
       <IsOwner />
-      <EditBtnStyle>edit</EditBtnStyle>
+      <EditBtnStyle style={{ backgroundColor: color }}>edit</EditBtnStyle>
     </DescriptionHeaderStyle>
   );
 };
