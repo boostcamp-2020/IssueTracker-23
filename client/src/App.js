@@ -1,15 +1,13 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import Header from '@Components/header';
-import SidePart from '@Pages/IssueDetail/sidePart';
-import MainPart from '@Pages/IssueDetail/mainPart';
+import IssueDetail from '@Pages/IssueDetail';
 
 const App = () => {
   return (
     <div>
       <Header />
-      <MainPart />
-      <SidePart />
+      <IssueDetail />
     </div>
   );
 };

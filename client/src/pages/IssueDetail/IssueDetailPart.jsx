@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import UserDescriptionDetail from '@Components/userDescriptionDetail';
+import DescriptionHeader from '@Components/DescriptionHeader';
 
 const dummyData = {
   title: 'title1',
@@ -55,10 +55,10 @@ const IssueDetailPart = () => {
   console.log(issueInfo, issueInfo.comments);
   return (
     <IssueDetailPartStyle>
-      <UserDescriptionDetail isOwner={true} value={issueInfo} />
+      <DescriptionHeader isOwner={true} value={issueInfo} />
       <div>
         {issueInfo.comments.map((elem, index) => (
-          <UserDescriptionDetail isOwner={false} key={index} value={elem} />
+          <DescriptionHeader isOwner={false} key={index} value={elem} />
         ))}
       </div>
     </IssueDetailPartStyle>

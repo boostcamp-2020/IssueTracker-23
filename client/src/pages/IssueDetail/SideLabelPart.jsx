@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import CommonSidePart from '@Components/sideMenu/commonSidePart';
-import LabelPart from '@Components/sideMenu/labelPart';
+import CommonSidePart from '@Components/CommonSidePart.jsx';
+import LabelPart from '@Components/LabelInDetail.jsx';
 import styled from 'styled-components';
 
 const LabelListStyle = styled.div`
