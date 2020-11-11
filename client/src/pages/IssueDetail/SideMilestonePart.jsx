@@ -6,10 +6,11 @@ import styled from 'styled-components';
 
 const MilestoneStyle = styled.div`
   width: 100%;
-  min-height: 75px;
+  min-height: 105px;
   height: auto;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid gray;
 `;
 
 const SideMilestonePart = () => {

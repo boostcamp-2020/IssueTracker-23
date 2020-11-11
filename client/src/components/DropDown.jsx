@@ -10,17 +10,18 @@ const DropDownStyle = styled.ul`
   position: absolute;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   box-sizing: border-box;
-  left: 47px;
+  border-radius: 0.4em;
   top: 20px;
+  right: 2px;
   padding: 0;
   background-color: white;
   z-index: 1;
   font-size: 14px;
   line-height: 14px;
+  width: 100%;
   & > li {
     box-sizing: border-box;
     padding: 8px;
-    width: 250px;
     height: auto;
     :hover {
       background-color: rgb(230, 232, 235);

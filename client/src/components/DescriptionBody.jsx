@@ -7,6 +7,7 @@ const DescriptionBodyStyle = styled.div`
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
   padding: 12px 20px;
+  word-break: keep-all;
 `;
 
 const VerticalLine = styled.div`

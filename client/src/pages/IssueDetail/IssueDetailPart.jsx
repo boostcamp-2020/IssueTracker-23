@@ -43,13 +43,13 @@ const dummyData = {
 };
 
 const IssueDetailPartStyle = styled.div`
-  position: fixed;
+  position: relative;
   width: 65%;
   top: 90px;
   left: 5%;
   hr {
     margin: 0;
-    border-top: 1px solid black;
+    border: 1px solid black;
   }
 `;
 

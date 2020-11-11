@@ -6,12 +6,11 @@ import SideLabelPart from './SideLabelPart.jsx';
 import SideMilestonePart from './SideMilestonePart.jsx';
 
 const SidePartStyle = styled.div`
-  position: fixed;
-  width: 300px;
-  top: 75px;
-  right: 0;
-  margin: 0;
-  border: 1px solid black;
+  position: absolute;
+  width: 20%;
+  top: 90px;
+  right: 5%;
+  margin-left: 30px;
 `;
 
 const IssueDetail = () => {

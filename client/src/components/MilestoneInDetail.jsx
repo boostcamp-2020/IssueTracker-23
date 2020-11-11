@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MilestonePartStyle = styled.div`
-  padding: 4px;
+  margin: 8px 4px;
   > div {
     height: 10px;
     border-radius: 1em;
@@ -17,19 +17,19 @@ const MilestonePartStyle = styled.div`
   > p {
     font-size: 14px;
     line-height: 14px;
-    margin: 4px 0 0 0;
+    margin: 12px 0 0 4px;
   }
 `;
 
 const MilestonePart = (props) => {
   const progressWidth =
-    (props.value.closedNumber / props.value.totalNumber) * 300 || 0;
+    (props.value.closedNumber / props.value.totalNumber) * 100 || 0;
 
   if (progressWidth !== 0)
     return (
       <MilestonePartStyle>
         <div>
-          <div style={{ width: progressWidth }}></div>
+          <div style={{ width: `${progressWidth}%` }}></div>
         </div>
         <p>{props.value.name}</p>
       </MilestonePartStyle>
