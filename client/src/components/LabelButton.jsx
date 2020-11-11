@@ -27,7 +27,7 @@ const LabelButton = (props) => {
 
   return (
     <StyledButton>
-      Lables
+      Labels
       {showCounter && <Counter>{labels.length}</Counter>}
     </StyledButton>
   );
