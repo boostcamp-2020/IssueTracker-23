@@ -5,7 +5,7 @@ import EditorButton from './EditorButton.jsx';
 const StyledEditorButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 5px 0 0 0;
+  margin: 5px;
 `;
 
 const EditorButtonWrapper = ({ Buttons }) => {

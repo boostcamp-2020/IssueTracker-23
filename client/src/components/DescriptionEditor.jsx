@@ -13,6 +13,7 @@ const StyledDescriptionEditor = styled.div`
   overflow: hidden;
   width: max-content;
   height: max-content;
+  margin: 10px;
   border: 1px solid #ccc;
 `;
 
