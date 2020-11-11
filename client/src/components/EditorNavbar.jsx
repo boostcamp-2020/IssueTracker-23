@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const WriteTab = styled.div`
+const WriteTab = styled.button`
   position: relative;
   z-index: 1;
   top: 1px;
@@ -20,6 +20,7 @@ const WriteTab = styled.div`
 
 const StyledEditorNavbar = styled.div`
   border-bottom: 1px solid #ccc;
+  margin: 10px 0 20px 0;
 `;
 
 const EditorNavbar = () => (
