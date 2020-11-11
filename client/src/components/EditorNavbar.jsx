@@ -18,6 +18,14 @@ const WriteTab = styled.div`
   vertical-align: middle;
 `;
 
-const DescriptionEditorNavigator = () => <WriteTab>Write</WriteTab>;
+const StyledEditorNavbar = styled.div`
+  border-bottom: 1px solid #ccc;
+`;
 
-export default DescriptionEditorNavigator;
+const EditorNavbar = () => (
+  <StyledEditorNavbar>
+    <WriteTab>Write</WriteTab>
+  </StyledEditorNavbar>
+);
+
+export default EditorNavbar;
