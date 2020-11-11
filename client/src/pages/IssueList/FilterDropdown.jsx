@@ -5,6 +5,14 @@ import DropdownMenu from '../../components/DropdownMenu.jsx';
 import DropdownOverlay from '../../components/DropdownOverlay';
 import DefaultButton from '../../components/DefaultButton';
 
+const filters = [
+  'Open issues',
+  'Your issues',
+  'Everything assigned to you',
+  'Everthing mentioning you',
+  'Cloesed issues',
+];
+
 const FilterButton = styled(DefaultButton)`
   position: relative;
   height: 100%;
@@ -13,7 +21,20 @@ const FilterButton = styled(DefaultButton)`
   font-size: 14px;
 `;
 
-const FilterDropdownMenu = () => <DropdownMenu title={'Filter Issues'} />;
+const FilterDropdownMenu = () => {
+  const filterItems = filters.map((filter) => (
+    <FilterItemContainer>{filter}</FilterItemContainer>
+  ));
+
+  return <DropdownMenu title={'Filter Issues'} items={filterItems} />;
+};
+
+const FilterItemContainer = styled.div`
+  padding: 8px 16px;
+  border-top: 1px solid #d1d5da;
+  cursor: pointer;
+  font-size: 12px;
+`;
 
 const FilterDropdown = () => {
   const [isFilterOpened, setIsFilterOpened] = useState(false);

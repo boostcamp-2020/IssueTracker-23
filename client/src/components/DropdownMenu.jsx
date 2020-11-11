@@ -11,6 +11,7 @@ const DropdownMenuContainer = styled.div`
   margin: 8px 0;
   border: 1px solid #d1d5da;
   border-radius: 6px;
+  background-color: white;
   box-shadow: 0.4em 0.4em 1em 0.4em rgba(0, 0, 0, 0.04);
   z-index: 99;
 `;
@@ -21,16 +22,17 @@ const DropdownHeaderContainer = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 600;
 `;
 
-const DropdownMenu = ({ title }) => {
+const DropdownMenu = ({ title, items }) => {
   return (
     <DropdownMenuContainer>
       <DropdownHeaderContainer>
         <Title>{title}</Title>
       </DropdownHeaderContainer>
+      <>{items}</>
     </DropdownMenuContainer>
   );
 };
