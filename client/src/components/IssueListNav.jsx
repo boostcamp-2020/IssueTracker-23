@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import DefaultButton from '../../components/DefaultButton';
+import DefaultButton from './DefaultButton';
 import FilterDropdown from './FilterDropdown.jsx';
 
 const SearchBar = styled.input`

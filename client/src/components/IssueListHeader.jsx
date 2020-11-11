@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import DefaultButton from '../../components/DefaultButton';
-import DropdownCaret from '../../components/DropdownCaret';
+import DefaultButton from './DefaultButton';
+import DropdownCaret from './.components/DropdownCaret';
 
 const FlexContainer = styled.div`
   display: flex;
