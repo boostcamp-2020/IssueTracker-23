@@ -1,1 +1,1 @@
-export { default } from './assigneePart';
+export { default } from './assigneePart.jsx';

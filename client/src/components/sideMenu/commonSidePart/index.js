@@ -1,1 +1,1 @@
-export { default } from './commonSidePart';
+export { default } from './commonSidePart.jsx';

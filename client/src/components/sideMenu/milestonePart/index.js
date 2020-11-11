@@ -1,1 +1,1 @@
-export { default } from './milestonePart';
+export { default } from './milestonePart.jsx';

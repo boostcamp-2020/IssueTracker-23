@@ -1,1 +1,1 @@
-export { default } from './issueDetailPart';
+export { default } from './issueDetailPart.jsx';

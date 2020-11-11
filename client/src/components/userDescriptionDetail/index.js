@@ -1,1 +1,1 @@
-export { default } from './descriptionHeader';
+export { default } from './descriptionHeader.jsx';

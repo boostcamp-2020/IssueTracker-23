@@ -1,1 +1,1 @@
-export { default } from './labelPart';
+export { default } from './labelPart.jsx';
