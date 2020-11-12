@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DropdownCaret from '../../components/DropdownCaret';
-import DropdownMenu from '../../components/DropdownMenu.jsx';
-import DropdownOverlay from '../../components/DropdownOverlay';
-import DefaultButton from '../../components/DefaultButton';
+import { darken } from 'polished';
+import DropdownCaret from './DropdownCaret';
+import DropdownMenu from './DropdownMenu';
+import DropdownOverlay from './DropdownOverlay';
+import Button from './Button';
 
 const filters = [
-  'Open issues',
-  'Your issues',
-  'Everything assigned to you',
-  'Everthing mentioning you',
-  'Cloesed issues',
+  { message: 'Open issues', key: 'isOpen', value: 'true' },
+  { message: 'Your issues', key: 'author', value: '@me' },
+  { message: 'Everything assigned to you', key: 'assignee', value: '@me' },
+  { message: 'Everthing commented by you', key: 'commented', value: '@me' },
+  { message: 'Cloesed issues', key: 'isOpen', value: 'false' },
 ];
 
-const FilterButton = styled(DefaultButton)`
+const FilterButton = styled(Button).attrs((props) => ({
+  background: '#fafbfc',
+  border: '#d1d5da',
+}))`
+  align-items: 
   position: relative;
   height: 100%;
   border-top-right-radius: 0;
@@ -21,26 +27,50 @@ const FilterButton = styled(DefaultButton)`
   font-size: 14px;
 `;
 
-const FilterDropdownMenu = () => {
-  const filterItems = filters.map((filter) => (
-    <FilterItemContainer>{filter}</FilterItemContainer>
+const StyledLink = styled(Link)`
+  padding: 8px 16px;
+  border-top: 1px solid #d1d5da;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    background: ${darken(0.1, '#ffffff')};
+    transition: 0.5s;
+  }
+`;
+
+const generateUrl = (filter, myId) => {
+  const baseUrl = '/';
+  const query = `?${filter.key}=${
+    filter.value === '@me' ? myId : filter.value
+  }`;
+  return baseUrl + query;
+};
+
+const FilterDropdownMenu = (props) => {
+  const filterItems = filters.map((filter, i) => (
+    <StyledLink
+      to={generateUrl(filter, 'test_id1')}
+      key={i}
+      onClick={props.onClick}
+      data-search-input={`${filter.key}:${filter.value}`}
+    >
+      {filter.message}
+    </StyledLink>
   ));
 
   return <DropdownMenu title={'Filter Issues'} items={filterItems} />;
 };
 
-const FilterItemContainer = styled.div`
-  padding: 8px 16px;
-  border-top: 1px solid #d1d5da;
-  cursor: pointer;
-  font-size: 12px;
-`;
-
-const FilterDropdown = () => {
-  const [isFilterOpened, setIsFilterOpened] = useState(false);
-
-  const dropdownHandler = () => setIsFilterOpened(!isFilterOpened);
-  const closeDropdownHandler = () => setIsFilterOpened(false);
+const FilterDropdown = (props) => {
+  const {
+    isFilterOpened,
+    dropdownHandler,
+    closeDropdownHandler,
+    filterClickHandler,
+  } = props;
 
   return (
     <div>
@@ -51,7 +81,7 @@ const FilterDropdown = () => {
       {isFilterOpened && (
         <div>
           <DropdownOverlay onClick={closeDropdownHandler} />
-          <FilterDropdownMenu />
+          <FilterDropdownMenu onClick={filterClickHandler} />
         </div>
       )}
     </div>
