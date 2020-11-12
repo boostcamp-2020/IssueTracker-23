@@ -10,7 +10,7 @@ const StyledTextarea = styled.textarea`
   background-color: #f7f7f7;
   resize: vertical;
   ${({ hasAttacher, width, height }) => css`
-    width: 100%;
+    width: ${width}px;
     height: ${hasAttacher ? height - 30 : height}px;
   `}
   min-height: 100px;
