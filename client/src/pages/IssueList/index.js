@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import IssueListNav from '../../components/IssueListNav';
 
 const StyledIssueList = styled.div`
@@ -9,7 +10,13 @@ const StyledIssueList = styled.div`
   padding: 32px;
 `;
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 const IssueList = () => {
+  const query = useQuery();
+
   const repositoryId = 1;
   const labels = [
     { id: 1, name: 'label1', desciption: null, color: '#ffffff' },
