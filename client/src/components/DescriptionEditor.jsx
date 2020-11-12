@@ -18,12 +18,18 @@ const StyledDescriptionEditor = styled.div`
   border: 1px solid #ccc;
 `;
 
-const DescriptionEditor = ({ hasCounter, hasAttacher, width, height }) => {
+const DescriptionEditor = ({
+  hasCounter,
+  hasAttacher,
+  width,
+  height,
+  host,
+}) => {
   return (
     <StyledDescriptionEditor>
       <Textarea hasAttacher={hasAttacher} width={width} height={height} />
       {hasCounter && <CharacterCounter hasAttacher={hasAttacher} />}
-      {hasAttacher && <ImageAttacher />}
+      {hasAttacher && <ImageAttacher host={host} />}
     </StyledDescriptionEditor>
   );
 };
