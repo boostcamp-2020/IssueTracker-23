@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import DefaultButton from './DefaultButton';
+import Button from './Button';
 
-const StyledButton = styled(DefaultButton)`
-  display: flex;
-  justify-content: center;
+const StyledButton = styled(Button).attrs((props) => ({
+  border: '#d1d5da',
+}))`
   align-items: flex-end;
   margin-left: -1px;
   border-top-left-radius: 0;
@@ -14,6 +14,7 @@ const StyledButton = styled(DefaultButton)`
 
 const Counter = styled.span`
   min-width: 20px;
+  margin: 0 0 0 4px;
   padding: 0 6px;
   border: 1px solid transparent;
   border-radius: 2em;

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import DropdownCaret from '../../components/DropdownCaret';
-import DropdownMenu from '../../components/DropdownMenu.jsx';
-import DropdownOverlay from '../../components/DropdownOverlay';
-import DefaultButton from '../../components/DefaultButton';
+import { darken } from 'polished';
+import DropdownCaret from './DropdownCaret';
+import DropdownMenu from './DropdownMenu';
+import DropdownOverlay from './DropdownOverlay';
+import Button from './Button';
 
 const filters = [
   'Open issues',
@@ -13,7 +14,11 @@ const filters = [
   'Cloesed issues',
 ];
 
-const FilterButton = styled(DefaultButton)`
+const FilterButton = styled(Button).attrs((props) => ({
+  background: '#fafbfc',
+  border: '#d1d5da',
+}))`
+  align-items: 
   position: relative;
   height: 100%;
   border-top-right-radius: 0;
@@ -21,9 +26,11 @@ const FilterButton = styled(DefaultButton)`
   font-size: 14px;
 `;
 
-const FilterDropdownMenu = () => {
-  const filterItems = filters.map((filter) => (
-    <FilterItemContainer>{filter}</FilterItemContainer>
+const FilterDropdownMenu = (props) => {
+  const filterItems = filters.map((filter, i) => (
+    <FilterItemContainer key={i} onClick={props.onClick}>
+      {filter}
+    </FilterItemContainer>
   ));
 
   return <DropdownMenu title={'Filter Issues'} items={filterItems} />;
@@ -34,6 +41,11 @@ const FilterItemContainer = styled.div`
   border-top: 1px solid #d1d5da;
   cursor: pointer;
   font-size: 12px;
+
+  &:hover {
+    background: ${darken(0.1, '#ffffff')};
+    transition: 0.5s;
+  }
 `;
 
 const FilterDropdown = () => {
@@ -51,7 +63,7 @@ const FilterDropdown = () => {
       {isFilterOpened && (
         <div>
           <DropdownOverlay onClick={closeDropdownHandler} />
-          <FilterDropdownMenu />
+          <FilterDropdownMenu onClick={closeDropdownHandler} />
         </div>
       )}
     </div>
