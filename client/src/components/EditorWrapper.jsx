@@ -1,15 +1,18 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import styled from 'styled-components';
+import UserProfileUrl from '@Components/UserProfileUrl.jsx';
 import DescriptionEditor from './DescriptionEditor.jsx';
 import EditorNavbar from './EditorNavbar.jsx';
 import EditorButtonWrapper from './EditorButtonWrapper.jsx';
-import TitleEditor from './TitleEditor.jsx';
 
 const StyledEditorWrapper = styled.div`
-  // margin: 100px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  width: max-content;
+  border-radius: 0.5em;
+  width: 100%;
 `;
 
 const BubbleTail = styled.div`
@@ -30,30 +33,15 @@ const BubbleWrapper = styled.div`
   justify-content: flex-start;
 `;
 
-const UserProfile = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
-  overflow: hidden;
-  object-fit: cover;
-`;
-
-const EditorWrapper = ({ width, height, padding }) => {
+const EditorWrapper = (props) => {
+  // UserProfileImage에는 author가 아니라 현재 로그인 유저가 들어가야함
   return (
     <BubbleWrapper>
-      <UserProfile
-        src={
-          'https://github.githubassets.com/images/modules/logos_page/Octocat.png'
-        }
-      />
+      <UserProfileUrl author={props.value.author} />
       <BubbleTail />
-      <StyledEditorWrapper width={width}>
-        <TitleEditor />
-        <EditorNavbar />
-        <DescriptionEditor
-          width={width - 2 * padding}
-          height={height - 2 * padding}
-        />
+      <StyledEditorWrapper>
+        <EditorNavbar value={props} />
+        <DescriptionEditor />
         <EditorButtonWrapper />
       </StyledEditorWrapper>
     </BubbleWrapper>
@@ -61,9 +49,15 @@ const EditorWrapper = ({ width, height, padding }) => {
 };
 
 EditorWrapper.defaultProps = {
-  width: 600,
-  height: 200,
-  padding: 10,
+  value: {
+    width: 600,
+    height: 200,
+    padding: 10,
+    author: {
+      profileUrl:
+        'https://github.githubassets.com/images/modules/logos_page/Octocat.png',
+    },
+  },
 };
 
 export default EditorWrapper;

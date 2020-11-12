@@ -2,13 +2,14 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const StyledTextarea = styled.textarea`
+  position: relative;
   border: none;
   padding: 10px;
   background-color: #f7f7f7;
   resize: vertical;
   ${({ attacher, width, height }) => css`
-    width: ${width}px;
-    height: ${attacher ? height - 30 : height}px;
+    width: 100%;
+    height: ${height};
   `}
   min-height: 100px;
 `;
