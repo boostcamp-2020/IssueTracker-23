@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import UserProfileUrl from '@Components/UserProfileUrl.jsx';
 import DescriptionEditor from './DescriptionEditor.jsx';
 import TitleEditor from './TitleEditor.jsx';
@@ -13,7 +13,9 @@ const StyledEditorWrapper = styled.div`
   margin-top: 16px;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  width: max-content;
+  ${({ width }) => css`
+    width: ${width}px;
+  `}
 `;
 
 const BubbleTail = styled.div`
