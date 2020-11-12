@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import WheelIcon from '@Public/wheelIcon.svg';
 import styled from 'styled-components';
-import DropDown from './ropDown.jsx';
+import DropDown from './DropDown.jsx';
 
 const CommonSidePartStyle = styled.div`
   width: 100%;
