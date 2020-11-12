@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MilestoneStyle = styled.div`
+const MilestoneStyle = styled.li`
   font-size: 14px;
   line-height: 14px;
   box-sizing: border-box;

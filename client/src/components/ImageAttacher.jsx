@@ -28,7 +28,10 @@ const ImageAttacher = ({ host }) => {
       formData.append('image', image);
       const textareaElement =
         fileInput.current.parentNode.parentNode.firstChild;
-      const newLine = textareaElement.value.slice(-1) === '\n' ? '' : '\n';
+      const newLine =
+        textareaElement.value === '' || textareaElement.value.slice(-1) === '\n'
+          ? ''
+          : '\n';
       textareaElement.value += `${newLine}![Uploading ${image.name}...]()`;
       return axios
         .post(`${host}/api/image`, formData)
