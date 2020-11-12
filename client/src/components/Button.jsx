@@ -5,7 +5,7 @@ import { darken } from 'polished';
 const StyledButton = styled.button`
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   border-radius: 6px;
   border: ${(props) =>
     props.border === 'none' ? 'none' : `1px solid ${props.border}`};
@@ -15,6 +15,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   outline: none;
   font-weight: ${(props) => props.fontWeight};
+  white-space: nowrap;
 
   &.small {
     padding: 4px 12px;
@@ -31,7 +32,8 @@ const StyledButton = styled.button`
   }
 
   &:hover {
-    background: ${(props) => darken(0.2, props.background)};
+    background: ${(props) => darken(0.1, props.background)};
+    transition: 0.5s;
   }
 `;
 
