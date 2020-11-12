@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CommonSidePart from '@Components/CommonSidePart.jsx';
 import LabelPart from '@Components/LabelInDetail.jsx';
 import styled from 'styled-components';
@@ -19,7 +19,7 @@ const LabelListStyle = styled.div`
   border-bottom: 1px solid gray;
 `;
 
-const SideLabelPart = () => {
+const SideLabelPart = ({ setIssueData }) => {
   const [labelList, setLabelList] = useState([]); // 여기에 갖고 있는 라벨 받아오기
 
   const clickItmeHandler = (clickedItem) => {
@@ -34,6 +34,12 @@ const SideLabelPart = () => {
     }
     setLabelList(newList);
   };
+
+  useEffect(() => {
+    setIssueData((prevIssueData) => {
+      return { ...prevIssueData, labels: labelList.map((label) => label.id) };
+    });
+  }, [labelList, setIssueData]);
 
   return (
     <div>

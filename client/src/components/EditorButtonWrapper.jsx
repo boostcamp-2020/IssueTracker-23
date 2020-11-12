@@ -9,24 +9,18 @@ const StyledEditorButtonWrapper = styled.div`
 `;
 
 const EditorButtonWrapper = ({
-  onClick,
   CancelButton,
   PostButton,
   postable,
+  onClickCancel,
+  onClickPost,
 }) => {
-  const clickHandler = (e) => {
-    if (e.target.tagName === 'BUTTON') {
-      if (e.target.innerText === 'submit') {
-        onClick({ isEdited: true });
-      } else onClick({ isEdited: false });
-    }
-  };
   return (
     <StyledEditorButtonWrapper>
-      <CancelButton text="Cancel" onClick={clickHandler}></CancelButton>
+      <CancelButton text="Cancel" onClick={onClickCancel}></CancelButton>
       <PostButton
         text="Post"
-        onClick={clickHandler}
+        onClick={onClickPost}
         disabled={postable ? null : '#77aa77'}
         bgColor="green"
         color="white"
