@@ -9,6 +9,7 @@ const ListContainer = styled.div`
   ${(props) =>
     css`
       border-radius: ${props.borderRadius};
+      margin: ${props.margin};
     `}
 `;
 const ListConetentContainer = styled.ul`
@@ -29,7 +30,7 @@ const List = (props) => {
     ));
 
   return (
-    <ListContainer borderRadius={props.borderRadius}>
+    <ListContainer borderRadius={props.borderRadius} margin={props.margin}>
       {props.header}
       <ListConetentContainer>
         {props.content ? contentList() : props.emptyComponent}
