@@ -1,30 +1,50 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
+
+const DEBOUNCE_TIME = 2000;
 
 const StyledTextarea = styled.textarea`
   border: none;
   padding: 10px;
   background-color: #f7f7f7;
   resize: vertical;
-  ${({ attacher, width, height }) => css`
+  ${({ hasAttacher, width, height }) => css`
     width: ${width}px;
-    height: ${attacher ? height - 30 : height}px;
+    height: ${hasAttacher ? height - 30 : height}px;
   `}
   min-height: 100px;
 `;
 
-const Textarea = ({ placeholder, attacher, width, height }) => (
-  <StyledTextarea
-    placeholder={placeholder}
-    attacher={attacher}
-    width={width}
-    height={height}
-  />
-);
+const Textarea = ({ placeholder, hasAttacher, width, height }) => {
+  const debounce = useRef(null);
+  const onType = useCallback((e) => {
+    if (e.currentTarget.nextSibling.tagName !== 'P') return;
+    const counter = e.currentTarget.nextSibling;
+    const textarea = e.currentTarget;
+    clearTimeout(debounce.current);
+    debounce.current = setTimeout(() => {
+      counter.style.display = 'inline';
+      counter.innerText = `${textarea.value.length} characters`;
+      setTimeout(() => {
+        counter.style.display = 'none';
+      }, DEBOUNCE_TIME);
+    }, DEBOUNCE_TIME);
+  }, []);
+
+  return (
+    <StyledTextarea
+      placeholder={placeholder}
+      hasAttacher={hasAttacher}
+      width={width}
+      height={height}
+      onChange={onType}
+    />
+  );
+};
 
 Textarea.defaultProps = {
   placeholder: 'Leave a comment',
-  attacher: true,
+  hasAttacher: true,
   width: 600,
   height: 200,
 };
