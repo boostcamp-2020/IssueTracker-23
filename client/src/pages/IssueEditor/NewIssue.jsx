@@ -19,7 +19,7 @@ const SidePartStyle = styled.div`
   margin-left: 30px;
 `;
 
-const host = 'http://localhost:3000';
+const host = 'http://101.101.208.162:3000';
 const repositoryId = 1;
 const NewIssue = () => {
   const [issueData, setIssueData] = useState({ author: 'test_id1' });
