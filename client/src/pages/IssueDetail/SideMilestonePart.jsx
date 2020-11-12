@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CommonSidePart from '@Components/CommonSidePart.jsx';
 import MilestonePart from '@Components/MilestoneInDetail.jsx';
 import styled from 'styled-components';
@@ -13,13 +13,21 @@ const MilestoneStyle = styled.div`
   border-bottom: 1px solid gray;
 `;
 
-const SideMilestonePart = () => {
+const SideMilestonePart = ({ setIssueData }) => {
   const [milestone, setMilestone] = useState('');
 
   const clickItmeHandler = (clickedItem) => {
     if (milestone.id === clickedItem.id) setMilestone('');
     else setMilestone(clickedItem);
   };
+
+  useEffect(() => {
+    if (!setIssueData) return;
+    setIssueData((prevIssueData) => {
+      return { ...prevIssueData, milestoneId: milestone.id };
+    });
+  }, [milestone, setIssueData]);
+
   return (
     <MilestoneStyle>
       <CommonSidePart

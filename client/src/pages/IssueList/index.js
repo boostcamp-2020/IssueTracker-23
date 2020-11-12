@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-import IssueListNav from '../../components/IssueListNav';
+import IssueListNav from '../../components/IssueListNav.jsx';
+import IssueListHeader from '../../components/IssueListHeader.jsx';
+import IssueContent from '../../components/issueList/IssueContent.jsx';
+import List from '../../components/List.jsx';
+import 'babel-polyfill';
 
 const StyledIssueList = styled.div`
   max-width: 1280px;
@@ -10,27 +13,54 @@ const StyledIssueList = styled.div`
   padding: 32px;
 `;
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
+const headerComponent = <IssueListHeader borderRadius="16px" />;
+const emptyComponent = <div>empty</div>;
 
 const IssueList = (props) => {
-  const query = useQuery();
+  const [query, setQuery] = useState(props.location.search);
+  const [content, setContent] = useState([]);
+  const [labels, setLabel] = useState([]);
+  const [milestones, setMilestone] = useState([]);
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const articleData = await fetch(
+        `http://101.101.208.162:3000/api/issues/1${query}`
+      );
+      const articleDataJson = await articleData.json();
+      const { data } = articleDataJson;
+      const { issueList } = data;
+      const articleRes = issueList.map((elem, i) => (
+        <IssueContent data={elem} />
+      ));
+      setContent(articleRes);
 
-  const repositoryId = 1;
-  const labels = [
-    { id: 1, name: 'label1', desciption: null, color: '#ffffff' },
-    { id: 2, name: 'label2', description: null, color: '#000000' },
-  ];
-  const milestones = [];
+      const labelData = await fetch(`http://101.101.208.162:3000/api/labels/1`);
+      const labelDataJson = await labelData.json();
+      setLabel(labelDataJson.data);
+      const milestoneData = await fetch(
+        'http://101.101.208.162:3000/api/milestones/1'
+      );
+      const milestoneDataJson = await milestoneData.json();
+      setMilestone(milestoneDataJson.data);
+    };
+    fetchArticles();
+  }, [query]);
 
   return (
     <StyledIssueList>
       <IssueListNav
         labels={labels}
         milestones={milestones}
+        setQuery={setQuery}
         {...props}
       ></IssueListNav>
+      <List
+        margin="16px 0"
+        borderRadius="16px"
+        content={content}
+        header={headerComponent}
+        emptyComponent={emptyComponent}
+      />
     </StyledIssueList>
   );
 };

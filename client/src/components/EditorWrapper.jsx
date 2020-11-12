@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import UserProfileUrl from '@Components/UserProfileUrl.jsx';
 import DescriptionEditor from './DescriptionEditor.jsx';
 import TitleEditor from './TitleEditor.jsx';
@@ -13,7 +13,9 @@ const StyledEditorWrapper = styled.div`
   margin-top: 16px;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  width: 100%;
+  ${({ width }) => css`
+    width: ${width}px;
+  `}
 `;
 
 const BubbleTail = styled.div`
@@ -34,22 +36,34 @@ const BubbleWrapper = styled.div`
   justify-content: flex-start;
 `;
 
-const EditorWrapper = (props) => {
+const EditorWrapper = ({
+  width,
+  height,
+  padding,
+  hasTitle,
+  onClickCancel,
+  onClickPost,
+  host,
+  value,
+}) => {
   const [postable, setPostable] = useState(true);
-  // UserProfileImage에는 author가 아니라 현재 로그인 유저가 들어가야함
-  console.log(props);
   return (
     <BubbleWrapper>
-      <UserProfileUrl author={props.value.author} />
+      <UserProfileUrl author={value.author} />
       <BubbleTail />
-      <StyledEditorWrapper width={props.width}>
-        {props.title && <TitleEditor setPostable={setPostable} />}
+      <StyledEditorWrapper width={width}>
+        {hasTitle && <TitleEditor setPostable={setPostable} />}
         <EditorNavbar />
         <DescriptionEditor
-          width={props.width - 2 * props.padding}
-          height={props.height - 2 * props.padding}
+          width={width - 2 * padding}
+          height={height - 2 * padding}
+          host={host}
         />
-        <EditorButtonWrapper onClick={props.onClick} postable={postable} />
+        <EditorButtonWrapper
+          postable={postable}
+          onClickCancel={onClickCancel}
+          onClickPost={onClickPost}
+        />
       </StyledEditorWrapper>
     </BubbleWrapper>
   );
@@ -59,7 +73,13 @@ EditorWrapper.defaultProps = {
   width: 600,
   height: 200,
   padding: 10,
-  title: true,
+  hasTitle: true,
+  value: {
+    author: {
+      profileUrl:
+        'https://github.githubassets.com/images/modules/logos_page/Octocat.png',
+    },
+  },
 };
 
 export default EditorWrapper;

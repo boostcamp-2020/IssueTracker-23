@@ -16,7 +16,8 @@ const TitleEditor = ({ placeholder, setPostable }) => {
   }, [setPostable]);
   const onChange = useCallback(
     (e) => {
-      if (e.currentTarget.value.length > 0) {
+      const title = e.currentTarget;
+      if (title.value.length > 0) {
         setPostable(() => true);
       } else {
         setPostable(() => false);
@@ -25,7 +26,13 @@ const TitleEditor = ({ placeholder, setPostable }) => {
     [setPostable]
   );
 
-  return <StyledTitleEditor placeholder={placeholder} onChange={onChange} />;
+  return (
+    <StyledTitleEditor
+      placeholder={placeholder}
+      onChange={onChange}
+      id="title-editor"
+    />
+  );
 };
 
 TitleEditor.defaultProps = {
