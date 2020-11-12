@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SearchBar from './SearchBar';
 import LabelButton from './LabelButton';
 import MilestoneButton from './MilestoneButton';
-import NewIssueButton from './NewIssueButton';
+import GreenButton from './GreenButton';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ const IssueListNav = (props) => {
         </FlexContainer>
       </FlexContainerWidthFull>
       <FlexContainerJustifyBetween margin={'0 0 0 16px'}>
-        <NewIssueButton />
+        <GreenButton text="New issue" />
       </FlexContainerJustifyBetween>
     </FlexContainerJustifyBetween>
   );
