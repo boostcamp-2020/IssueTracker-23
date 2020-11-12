@@ -12,6 +12,7 @@ const Input = styled.input.attrs((props) => ({
   border-radius: 0 6px 6px 0;
   background-color: #fafbfc;
   font-size: 14px;
+  line-height: 20px;
 `;
 
 const SearchBar = (props) => {
