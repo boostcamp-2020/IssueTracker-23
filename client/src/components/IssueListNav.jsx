@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import FilterDropdown from './FilterDropdown';
@@ -29,28 +29,56 @@ const FlexContainerJustifyBetween = styled(FlexContainer)`
 
 const IssueListNav = (props) => {
   const { labels, milestones } = props;
+
+  const [isQuerySubmitted, setQuerySubmitted] = useState(false);
+
+  const searchBarEnterHandler = (e) => {
+    if (e.key === 'Enter') {
+      setQuerySubmitted(true);
+    }
+  };
+  const searchBarClearHandler = () => {
+    document.getElementById('searchBar').value = '';
+    setQuerySubmitted(false);
+  };
+
   return (
-    <FlexContainerJustifyBetween>
-      <FlexContainerWidthFull>
-        <FilterDropdown />
-        <SearchBar placeholder="Search all issues" />
-        <FlexContainer margin={'0 0 0 16px'}>
-          <StyledLink to="/labels">
-            <LabelButton showCounter={true} labels={labels} />
+    <div>
+      <FlexContainerJustifyBetween>
+        <FlexContainerWidthFull>
+          <FilterDropdown />
+          <SearchBar
+            id="searchBar"
+            placeholder="Search all issues"
+            onKeyPress={searchBarEnterHandler}
+          />
+          <FlexContainer margin={'0 0 0 16px'}>
+            <StyledLink to="/labels">
+              <LabelButton showCounter={true} labels={labels} />
+            </StyledLink>
+            <StyledLink to="/milestones">
+              <MilestoneButton showCounter={true} milestones={milestones} />
+            </StyledLink>
+          </FlexContainer>
+        </FlexContainerWidthFull>
+        <FlexContainerJustifyBetween margin={'0 0 0 16px'}>
+          <StyledLink to="issue/new">
+            <Button background="#2ea44f" border="#2a8645" color="white">
+              New issue
+            </Button>
           </StyledLink>
-          <StyledLink to="/milestones">
-            <MilestoneButton showCounter={true} milestones={milestones} />
-          </StyledLink>
-        </FlexContainer>
-      </FlexContainerWidthFull>
-      <FlexContainerJustifyBetween margin={'0 0 0 16px'}>
-        <StyledLink to="issue/new">
-          <Button background="#2ea44f" border="#2a8645" color="white">
-            New issue
-          </Button>
-        </StyledLink>
+        </FlexContainerJustifyBetween>
       </FlexContainerJustifyBetween>
-    </FlexContainerJustifyBetween>
+      {isQuerySubmitted && (
+        <Button
+          transparent={true}
+          border="none"
+          onClick={searchBarClearHandler}
+        >
+          clear
+        </Button>
+      )}
+    </div>
   );
 };
 

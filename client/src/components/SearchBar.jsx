@@ -18,9 +18,11 @@ const Input = styled.input.attrs((props) => ({
 const SearchBar = (props) => {
   return (
     <Input
+      id={props.id}
       placeholder={props.placeholder}
       width={props.width}
       margin={props.margin}
+      onKeyPress={props.onKeyPress}
     />
   );
 };
