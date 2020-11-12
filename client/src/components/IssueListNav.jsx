@@ -31,6 +31,7 @@ const IssueListNav = (props) => {
   const { labels, milestones } = props;
 
   const [isQuerySubmitted, setQuerySubmitted] = useState(false);
+  const [isFilterOpened, setFilterOpened] = useState(false);
 
   const searchBarEnterHandler = (e) => {
     if (e.key === 'Enter') {
@@ -41,12 +42,26 @@ const IssueListNav = (props) => {
     document.getElementById('searchBar').value = '';
     setQuerySubmitted(false);
   };
+  const dropdownHandler = () => setFilterOpened(!isFilterOpened);
+  const closeDropdownHandler = () => setFilterOpened(false);
+  const filterClickHandler = () => {
+    document.getElementById('searchBar').value = 'filter click';
+    setQuerySubmitted(true);
+    closeDropdownHandler();
+  };
 
   return (
     <div>
       <FlexContainerJustifyBetween>
         <FlexContainerWidthFull>
-          <FilterDropdown />
+          <FilterDropdown
+            {...{
+              isFilterOpened,
+              dropdownHandler,
+              closeDropdownHandler,
+              filterClickHandler,
+            }}
+          />
           <SearchBar
             id="searchBar"
             placeholder="Search all issues"

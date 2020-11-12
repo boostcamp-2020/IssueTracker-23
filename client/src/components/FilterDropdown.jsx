@@ -48,11 +48,13 @@ const FilterItemContainer = styled.div`
   }
 `;
 
-const FilterDropdown = () => {
-  const [isFilterOpened, setIsFilterOpened] = useState(false);
-
-  const dropdownHandler = () => setIsFilterOpened(!isFilterOpened);
-  const closeDropdownHandler = () => setIsFilterOpened(false);
+const FilterDropdown = (props) => {
+  const {
+    isFilterOpened,
+    dropdownHandler,
+    closeDropdownHandler,
+    filterClickHandler,
+  } = props;
 
   return (
     <div>
@@ -63,7 +65,7 @@ const FilterDropdown = () => {
       {isFilterOpened && (
         <div>
           <DropdownOverlay onClick={closeDropdownHandler} />
-          <FilterDropdownMenu onClick={closeDropdownHandler} />
+          <FilterDropdownMenu onClick={filterClickHandler} />
         </div>
       )}
     </div>
