@@ -14,7 +14,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const IssueList = () => {
+const IssueList = (props) => {
   const query = useQuery();
 
   const repositoryId = 1;
@@ -26,7 +26,11 @@ const IssueList = () => {
 
   return (
     <StyledIssueList>
-      <IssueListNav labels={labels} milestones={milestones}></IssueListNav>
+      <IssueListNav
+        labels={labels}
+        milestones={milestones}
+        {...props}
+      ></IssueListNav>
     </StyledIssueList>
   );
 };
