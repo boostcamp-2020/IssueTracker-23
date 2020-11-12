@@ -38,7 +38,7 @@ const UserProfile = styled.img`
   object-fit: cover;
 `;
 
-const EditorWrapper = ({ width, height, padding }) => {
+const EditorWrapper = ({ width, height, padding, title }) => {
   return (
     <BubbleWrapper>
       <UserProfile
@@ -48,7 +48,7 @@ const EditorWrapper = ({ width, height, padding }) => {
       />
       <BubbleTail />
       <StyledEditorWrapper width={width}>
-        <TitleEditor />
+        {title && <TitleEditor />}
         <EditorNavbar />
         <DescriptionEditor
           width={width - 2 * padding}
@@ -64,6 +64,7 @@ EditorWrapper.defaultProps = {
   width: 600,
   height: 200,
   padding: 10,
+  title: true,
 };
 
 export default EditorWrapper;
