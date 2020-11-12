@@ -44,8 +44,8 @@ const IssueListNav = (props) => {
   };
   const dropdownHandler = () => setFilterOpened(!isFilterOpened);
   const closeDropdownHandler = () => setFilterOpened(false);
-  const filterClickHandler = () => {
-    document.getElementById('searchBar').value = 'filter click';
+  const filterClickHandler = (e) => {
+    document.getElementById('searchBar').value = e.target.dataset.searchInput;
     setQuerySubmitted(true);
     closeDropdownHandler();
   };
@@ -85,13 +85,15 @@ const IssueListNav = (props) => {
         </FlexContainerJustifyBetween>
       </FlexContainerJustifyBetween>
       {isQuerySubmitted && (
-        <Button
-          transparent={true}
-          border="none"
-          onClick={searchBarClearHandler}
-        >
-          clear
-        </Button>
+        <Link to="/">
+          <Button
+            transparent={true}
+            border="none"
+            onClick={searchBarClearHandler}
+          >
+            clear
+          </Button>
+        </Link>
       )}
     </div>
   );
