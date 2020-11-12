@@ -16,10 +16,11 @@ const DescriptionHeaderStyle = styled.div`
   border-top-right-radius: 0.5em;
   background-color: rgb(207, 207, 207);
   div {
-    margin: auto;
+    margin: 0 auto 0 0;
   }
 `;
 const TimelineStyle = styled.div`
+  padding: 4px 12px;
   width: 75%;
 `;
 const IsOwnerStyle = styled.div`

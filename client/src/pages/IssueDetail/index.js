@@ -65,7 +65,7 @@ const SidePartStyle = styled.div`
 `;
 
 const IssueDetail = () => {
-  const [issueInfo, setIssueInfo] = useState(dummyData);
+  const [issueInfo] = useState(dummyData);
   return (
     <IssueDetailContainer>
       <IssueDetailHeader value={issueInfo} />

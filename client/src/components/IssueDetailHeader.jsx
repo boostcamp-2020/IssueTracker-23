@@ -24,7 +24,7 @@ const IssueTimeline = styled.div`
   flex-direction: row;
   padding: 8px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 14px;
 `;
 const IsOpenIssue = styled.div`
@@ -35,6 +35,10 @@ const IsOpenIssue = styled.div`
   line-height: 20px;
   text-align: center;
   color: white;
+`;
+const CreateAuthor = styled.div`
+  line-height: 18px;
+  margin: auto 4px auto 0;
   font-weight: 600;
 `;
 const Timeline = styled.div`
@@ -62,10 +66,8 @@ const IssueDetailHeader = (props) => {
             Closed
           </IsOpenIssue>
         )}
-        <Timeline>
-          {props.value.author.userName} opened this issue at{' '}
-          {props.value.createdDate}
-        </Timeline>
+        <CreateAuthor>{props.value.author.userName} </CreateAuthor>
+        <Timeline>opened this issue at {props.value.createdDate}</Timeline>
         <CommentNumber> · {props.value.comments.length} comments</CommentNumber>
       </IssueTimeline>
     </IssueDetailHeaderStyle>
