@@ -10,6 +10,7 @@ const config = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.[hash].js',
+    publicPath: '/',
   },
 
   module: {
@@ -50,7 +51,8 @@ const config = {
   devServer: {
     host: 'localhost',
     port: clientPort,
-    open: true, // open page when start
+    open: true,
+    historyApiFallback: true,
   },
 
   resolve: {
