@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import IssueListNav from '../../components/IssueListNav';
 
 const StyledIssueList = styled.div`
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
   padding: 32px;
 `;
 
