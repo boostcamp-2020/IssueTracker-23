@@ -9,7 +9,6 @@ const StyledEditorButtonWrapper = styled.div`
 `;
 
 const EditorButtonWrapper = ({ CancelButton, PostButton, postable }) => {
-  console.log(postable);
   const testButton = () => {
     console.log('buttonClick', postable);
   };
