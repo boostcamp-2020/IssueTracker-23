@@ -4,6 +4,10 @@ import CommonSidePart from '@Components/CommonSidePart.jsx';
 import LabelPart from '@Components/LabelInDetail.jsx';
 import styled from 'styled-components';
 
+const NoLabelStyle = styled.div`
+  padding: 4px;
+  font-size: 14px;
+`;
 const LabelListStyle = styled.div`
   padding: 4px;
   width: 100%;
@@ -30,6 +34,7 @@ const SideLabelPart = () => {
     }
     setLabelList(newList);
   };
+
   return (
     <div>
       <CommonSidePart
@@ -57,9 +62,13 @@ const SideLabelPart = () => {
         ]}
       />
       <LabelListStyle>
-        {labelList.map((elem, index) => {
-          return <LabelPart key={index} value={elem} />;
-        })}
+        {labelList.length === 0 ? (
+          <NoLabelStyle>No Labels</NoLabelStyle>
+        ) : (
+          labelList.map((elem, index) => {
+            return <LabelPart key={index} value={elem} />;
+          })
+        )}
       </LabelListStyle>
     </div>
   );

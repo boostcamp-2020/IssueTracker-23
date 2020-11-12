@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import EditorWrapper from '@Components/EditorWrapper.jsx';
 import IssueDetailItem from './IssueDetailItem.jsx';
 
 const dummyData = {
@@ -63,6 +64,7 @@ const IssueDetailPart = () => {
         <IssueDetailItem key={index} isOwner={false} value={elem} />
       ))}
       <hr />
+      <EditorWrapper value={issueInfo} />
     </IssueDetailPartStyle>
   );
 };

@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const NoMilestoneStyle = styled.div`
+  margin: 8px;
+  font-size: 14px;
+`;
 const MilestonePartStyle = styled.div`
   margin: 8px 4px;
   > div {
@@ -34,7 +38,7 @@ const MilestonePart = (props) => {
         <p>{props.value.name}</p>
       </MilestonePartStyle>
     );
-  return null;
+  return <NoMilestoneStyle>No Milestone</NoMilestoneStyle>;
 };
 
 export default MilestonePart;
