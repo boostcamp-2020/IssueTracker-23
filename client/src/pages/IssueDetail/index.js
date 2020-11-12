@@ -13,7 +13,10 @@ const SidePartStyle = styled.div`
   margin-left: 30px;
 `;
 
-const IssueDetail = () => {
+const IssueDetail = ({ match }) => {
+  const repositoryId = 1;
+  const { id } = match.params;
+
   return (
     <div>
       <IssueDetailPart />

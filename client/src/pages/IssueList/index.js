@@ -7,6 +7,7 @@ const StyledIssueList = styled.div`
 `;
 
 const IssueList = () => {
+  const repositoryId = 1;
   const labels = [
     { id: 1, name: 'label1', desciption: null, color: '#ffffff' },
     { id: 2, name: 'label2', description: null, color: '#000000' },
