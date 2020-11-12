@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import DescriptionEditor from './DescriptionEditor.jsx';
 import EditorNavbar from './EditorNavbar.jsx';
@@ -39,6 +39,8 @@ const UserProfile = styled.img`
 `;
 
 const EditorWrapper = ({ width, height, padding, title }) => {
+  const [postable, setPostable] = useState(true);
+
   return (
     <BubbleWrapper>
       <UserProfile
@@ -48,13 +50,13 @@ const EditorWrapper = ({ width, height, padding, title }) => {
       />
       <BubbleTail />
       <StyledEditorWrapper width={width}>
-        {title && <TitleEditor />}
+        {title && <TitleEditor setPostable={setPostable} />}
         <EditorNavbar />
         <DescriptionEditor
           width={width - 2 * padding}
           height={height - 2 * padding}
         />
-        <EditorButtonWrapper />
+        <EditorButtonWrapper postable={postable} />
       </StyledEditorWrapper>
     </BubbleWrapper>
   );
