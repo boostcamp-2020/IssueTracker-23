@@ -27,15 +27,33 @@ const FlexContainerJustifyBetween = styled(FlexContainer)`
   justify-content: space-between;
 `;
 
+const searchInputToUrl = (searchInput, myId) => {
+  const baseUrl = '/';
+  const keywords = searchInput.split(' ');
+
+  const query = keywords
+    .map((keyword) => {
+      if (keyword.includes(':'))
+        return keyword.replaceAll(':', '=').replaceAll('@me', myId);
+      return `q=${keyword}`;
+    })
+    .reduce((acc, val) => `${acc}&${val}`);
+
+  return `${baseUrl}?${query}`;
+};
+
 const IssueListNav = (props) => {
-  const { labels, milestones } = props;
+  const { labels, milestones, ...rest } = props;
 
   const [isQuerySubmitted, setQuerySubmitted] = useState(false);
   const [isFilterOpened, setFilterOpened] = useState(false);
 
   const searchBarEnterHandler = (e) => {
     if (e.key === 'Enter') {
+      const searchInput = document.getElementById('searchBar').value;
+      const url = searchInputToUrl(searchInput, 'test_id1');
       setQuerySubmitted(true);
+      props.history.push(url);
     }
   };
   const searchBarClearHandler = () => {
@@ -66,6 +84,7 @@ const IssueListNav = (props) => {
             id="searchBar"
             placeholder="Search all issues"
             onKeyPress={searchBarEnterHandler}
+            {...rest}
           />
           <FlexContainer margin={'0 0 0 16px'}>
             <StyledLink to="/labels">
