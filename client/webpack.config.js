@@ -24,6 +24,10 @@ const config = {
         use: ['style-loader', 'css-loader'],
       },
       {
+        test: /\.svg$/,
+        use: ['react-svg-loader'],
+      },
+      {
         test: /\.html$/,
         use: [
           {
