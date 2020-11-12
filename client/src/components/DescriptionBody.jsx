@@ -10,21 +10,8 @@ const DescriptionBodyStyle = styled.div`
   word-break: keep-all;
 `;
 
-const VerticalLine = styled.div`
-  position: relative;
-  left: 15px;
-  border-left: 1px solid black;
-  width: 0;
-  height: 50px;
-`;
-
-const DescriptionHeader = (props) => {
-  return (
-    <div>
-      <DescriptionBodyStyle>{props.value.description}</DescriptionBodyStyle>
-      <VerticalLine />
-    </div>
-  );
+const DescriptionBody = (props) => {
+  return <DescriptionBodyStyle>{props.value.description}</DescriptionBodyStyle>;
 };
 
-export default DescriptionHeader;
+export default DescriptionBody;

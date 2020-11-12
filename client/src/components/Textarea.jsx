@@ -4,12 +4,13 @@ import styled, { css } from 'styled-components';
 const DEBOUNCE_TIME = 2000;
 
 const StyledTextarea = styled.textarea`
+  position: relative;
   border: none;
   padding: 10px;
   background-color: #f7f7f7;
   resize: vertical;
   ${({ hasAttacher, width, height }) => css`
-    width: ${width}px;
+    width: 100%;
     height: ${hasAttacher ? height - 30 : height}px;
   `}
   min-height: 100px;

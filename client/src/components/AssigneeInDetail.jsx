@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const AssingeePartStyle = styled.div`
   width: 100%;
   height: 30px;
-  padding: 8px;
+  padding: 4px;
   box-sizing: border-box;
   margin: 0;
   display: flex;

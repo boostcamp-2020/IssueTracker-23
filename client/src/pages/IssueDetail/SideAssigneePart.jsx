@@ -4,7 +4,12 @@ import CommonSidePart from '@Components/CommonSidePart.jsx';
 import AssigneePart from '@Components/AssigneeInDetail.jsx';
 import styled from 'styled-components';
 
+const NoAssigneeStyle = styled.div`
+  padding: 4px;
+  font-size: 14px;
+`;
 const AssigneeListStyle = styled.div`
+  padding: 4px;
   width: 100%;
   min-height: 75px;
   height: auto;
@@ -50,9 +55,13 @@ const SideAssigneePart = () => {
         ]}
       />
       <AssigneeListStyle>
-        {assignedUser.map((elem, index) => {
-          return <AssigneePart key={index} value={elem} />;
-        })}
+        {assignedUser.length === 0 ? (
+          <NoAssigneeStyle>No Assignee. assign yourself!</NoAssigneeStyle>
+        ) : (
+          assignedUser.map((elem, index) => {
+            return <AssigneePart key={index} value={elem} />;
+          })
+        )}
       </AssigneeListStyle>
     </div>
   );

@@ -18,6 +18,8 @@ const DropdownMenuContainer = styled.div`
 
 const DropdownHeaderContainer = styled.div`
   padding: 8px 16px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   background-color: #fafbfc;
 `;
 

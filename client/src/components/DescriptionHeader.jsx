@@ -16,10 +16,11 @@ const DescriptionHeaderStyle = styled.div`
   border-top-right-radius: 0.5em;
   background-color: rgb(207, 207, 207);
   div {
-    margin: auto;
+    margin: 0 auto 0 0;
   }
 `;
 const TimelineStyle = styled.div`
+  padding: 4px 12px;
   width: 75%;
 `;
 const IsOwnerStyle = styled.div`
@@ -53,13 +54,22 @@ const DescriptionHeader = (props) => {
     return <IsOwnerStyle style={{ visibility: 'hidden' }}>owner</IsOwnerStyle>;
   };
 
+  const editClickHandler = () => {
+    props.onClick(!props.isEdit);
+  };
+
   return (
     <DescriptionHeaderStyle style={{ backgroundColor: headerColor }}>
       <TimelineStyle>
         {issueInfo.author.userName} Commented at {issueInfo.updatedDate}
       </TimelineStyle>
       <IsOwner />
-      <EditBtnStyle style={{ backgroundColor: headerColor }}>edit</EditBtnStyle>
+      <EditBtnStyle
+        onClick={editClickHandler}
+        style={{ backgroundColor: headerColor }}
+      >
+        edit
+      </EditBtnStyle>
     </DescriptionHeaderStyle>
   );
 };
