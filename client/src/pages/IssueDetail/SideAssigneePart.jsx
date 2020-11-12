@@ -35,6 +35,7 @@ const SideAssigneePart = ({ setIssueData }) => {
   };
 
   useEffect(() => {
+    if (!setIssueData) return;
     setIssueData((prevIssueData) => {
       return {
         ...prevIssueData,
