@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledTitleEditor = styled.input`
@@ -10,12 +10,22 @@ const StyledTitleEditor = styled.input`
   background-color: #f0f0f0;
 `;
 
-const TitleEditor = ({ placeholder }) => {
-  return (
-    <div>
-      <StyledTitleEditor placeholder={placeholder} />
-    </div>
+const TitleEditor = ({ placeholder, setPostable }) => {
+  useEffect(() => {
+    setPostable(() => false);
+  }, [setPostable]);
+  const onChange = useCallback(
+    (e) => {
+      if (e.currentTarget.value.length > 0) {
+        setPostable(() => true);
+      } else {
+        setPostable(() => false);
+      }
+    },
+    [setPostable]
   );
+
+  return <StyledTitleEditor placeholder={placeholder} onChange={onChange} />;
 };
 
 TitleEditor.defaultProps = {
