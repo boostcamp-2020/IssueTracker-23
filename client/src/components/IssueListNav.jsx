@@ -1,9 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import FilterDropdown from './FilterDropdown';
 import SearchBar from './SearchBar';
 import LabelButton from './LabelButton';
 import MilestoneButton from './MilestoneButton';
-import GreenButton from './GreenButton';
+import Button from './Button';
+
+const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+`;
 
 const FlexContainer = styled.div`
   display: flex;
@@ -23,14 +32,23 @@ const IssueListNav = (props) => {
   return (
     <FlexContainerJustifyBetween>
       <FlexContainerWidthFull>
+        <FilterDropdown />
         <SearchBar placeholder="Search all issues" />
         <FlexContainer margin={'0 0 0 16px'}>
-          <LabelButton showCounter={true} labels={labels} />
-          <MilestoneButton showCounter={true} milestones={milestones} />
+          <StyledLink to="/labels">
+            <LabelButton showCounter={true} labels={labels} />
+          </StyledLink>
+          <StyledLink to="/milestones">
+            <MilestoneButton showCounter={true} milestones={milestones} />
+          </StyledLink>
         </FlexContainer>
       </FlexContainerWidthFull>
       <FlexContainerJustifyBetween margin={'0 0 0 16px'}>
-        <GreenButton text="New issue" />
+        <StyledLink to="issue/new">
+          <Button background="#2ea44f" border="#2a8645" color="white">
+            New issue
+          </Button>
+        </StyledLink>
       </FlexContainerJustifyBetween>
     </FlexContainerJustifyBetween>
   );
