@@ -51,7 +51,8 @@ const IssueDetailItem = (props) => {
           <DescriptionEditor />
           <EditorButtonWrapper
             postable={true}
-            onClick={editButtonClickHandler}
+            onClickCancel={editButtonClickHandler}
+            onClickPost={editButtonClickHandler}
           />
         </EditorWrapperStyle>
       );
