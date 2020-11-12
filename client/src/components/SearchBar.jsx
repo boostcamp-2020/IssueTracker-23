@@ -11,7 +11,6 @@ const Input = styled.input.attrs((props) => ({
   border: 1px solid #d1d5da;
   border-radius: 0 6px 6px 0;
   background-color: #fafbfc;
-  color: #586069;
   font-size: 14px;
 `;
 
