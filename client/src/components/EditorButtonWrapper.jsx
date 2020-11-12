@@ -8,14 +8,25 @@ const StyledEditorButtonWrapper = styled.div`
   margin: 5px;
 `;
 
-const EditorButtonWrapper = ({ Buttons }) => {
-  return <StyledEditorButtonWrapper>{Buttons}</StyledEditorButtonWrapper>;
+const EditorButtonWrapper = (props) => {
+  const clickHandler = (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      if (e.target.innerText === 'submit') {
+        props.onClick({ isEdited: true });
+      } else props.onClick({ isEdited: false });
+    }
+  };
+  return (
+    <StyledEditorButtonWrapper onClick={clickHandler}>
+      {props.Buttons}
+    </StyledEditorButtonWrapper>
+  );
 };
 
 EditorButtonWrapper.defaultProps = {
   Buttons: [
-    <EditorButton text="test1" backColor="white" color="black" key={1} />,
-    <EditorButton text="test2" backColor="green" color="white" key={2} />,
+    <EditorButton text="cancel" backColor="white" color="black" key={1} />,
+    <EditorButton text="submit" backColor="green" color="white" key={2} />,
   ],
 };
 

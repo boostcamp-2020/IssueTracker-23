@@ -54,13 +54,22 @@ const DescriptionHeader = (props) => {
     return <IsOwnerStyle style={{ visibility: 'hidden' }}>owner</IsOwnerStyle>;
   };
 
+  const editClickHandler = () => {
+    props.onClick(!props.isEdit);
+  };
+
   return (
     <DescriptionHeaderStyle style={{ backgroundColor: headerColor }}>
       <TimelineStyle>
         {issueInfo.author.userName} Commented at {issueInfo.updatedDate}
       </TimelineStyle>
       <IsOwner />
-      <EditBtnStyle style={{ backgroundColor: headerColor }}>edit</EditBtnStyle>
+      <EditBtnStyle
+        onClick={editClickHandler}
+        style={{ backgroundColor: headerColor }}
+      >
+        edit
+      </EditBtnStyle>
     </DescriptionHeaderStyle>
   );
 };
