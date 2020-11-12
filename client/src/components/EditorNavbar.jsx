@@ -23,10 +23,13 @@ const StyledEditorNavbar = styled.div`
   margin: 10px 0 20px 0;
 `;
 
-const EditorNavbar = () => (
-  <StyledEditorNavbar>
-    <WriteTab>Write</WriteTab>
-  </StyledEditorNavbar>
-);
+const EditorNavbar = (props) => {
+  // props 받아서 유저==author인지 아닌지에 따라 색 넣기
+  return (
+    <StyledEditorNavbar>
+      <WriteTab>Write</WriteTab>
+    </StyledEditorNavbar>
+  );
+};
 
 export default EditorNavbar;

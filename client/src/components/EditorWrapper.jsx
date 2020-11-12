@@ -1,15 +1,19 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import UserProfileUrl from '@Components/UserProfileUrl.jsx';
 import DescriptionEditor from './DescriptionEditor.jsx';
+import TitleEditor from './TitleEditor.jsx';
 import EditorNavbar from './EditorNavbar.jsx';
 import EditorButtonWrapper from './EditorButtonWrapper.jsx';
-import TitleEditor from './TitleEditor.jsx';
 
 const StyledEditorWrapper = styled.div`
-  // margin: 100px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  width: max-content;
+  border-radius: 0.5em;
+  width: 100%;
 `;
 
 const BubbleTail = styled.div`
@@ -30,33 +34,22 @@ const BubbleWrapper = styled.div`
   justify-content: flex-start;
 `;
 
-const UserProfile = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
-  overflow: hidden;
-  object-fit: cover;
-`;
-
-const EditorWrapper = ({ width, height, padding, title }) => {
+const EditorWrapper = (props) => {
   const [postable, setPostable] = useState(true);
-
+  // UserProfileImage에는 author가 아니라 현재 로그인 유저가 들어가야함
+  console.log(props);
   return (
     <BubbleWrapper>
-      <UserProfile
-        src={
-          'https://github.githubassets.com/images/modules/logos_page/Octocat.png'
-        }
-      />
+      <UserProfileUrl author={props.value.author} />
       <BubbleTail />
-      <StyledEditorWrapper width={width}>
-        {title && <TitleEditor setPostable={setPostable} />}
+      <StyledEditorWrapper width={props.width}>
+        {props.title && <TitleEditor setPostable={setPostable} />}
         <EditorNavbar />
         <DescriptionEditor
-          width={width - 2 * padding}
-          height={height - 2 * padding}
+          width={props.width - 2 * props.padding}
+          height={props.height - 2 * props.padding}
         />
-        <EditorButtonWrapper postable={postable} />
+        <EditorButtonWrapper onClick={props.onClick} postable={postable} />
       </StyledEditorWrapper>
     </BubbleWrapper>
   );

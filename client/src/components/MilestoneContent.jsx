@@ -12,6 +12,8 @@ const MilestoneStyle = styled.div`
     pointer-events: none;
   }
 `;
+
+// 현재 위에서 styled.div로 되어있어서 클릭이 안됨 li로 바꾸면 다시 잘됨
 const MilestoneContent = (props) => {
   let milestoneDueDate = null;
   if (props.value.dueDate === null) milestoneDueDate = <div>No due date</div>;

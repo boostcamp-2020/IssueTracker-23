@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const MilestoneStyle = styled.div`
   width: 100%;
-  min-height: 105px;
+  min-height: 110px;
   height: auto;
   display: flex;
   flex-direction: column;

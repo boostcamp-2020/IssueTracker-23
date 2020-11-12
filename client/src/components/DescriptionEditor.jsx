@@ -8,12 +8,13 @@ const StyledDescriptionEditor = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-sizing: border-box;
   position: relative;
   border-radius: 5px;
   overflow: hidden;
-  width: max-content;
-  height: max-content;
-  margin: 10px;
+  width: auto;
+  height: auto;
+  margin: auto 10px;
   border: 1px solid #ccc;
 `;
 
@@ -31,7 +32,7 @@ DescriptionEditor.defaultProps = {
   hasCounter: true,
   hasAttacher: true,
   width: 600,
-  height: 200,
+  height: 100,
 };
 
 export default DescriptionEditor;
