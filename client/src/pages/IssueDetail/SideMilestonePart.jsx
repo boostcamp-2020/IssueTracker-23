@@ -22,6 +22,7 @@ const SideMilestonePart = ({ setIssueData }) => {
   };
 
   useEffect(() => {
+    if (!setIssueData) return;
     setIssueData((prevIssueData) => {
       return { ...prevIssueData, milestoneId: milestone.id };
     });

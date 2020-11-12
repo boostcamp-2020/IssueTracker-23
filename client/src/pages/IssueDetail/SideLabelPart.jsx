@@ -36,6 +36,7 @@ const SideLabelPart = ({ setIssueData }) => {
   };
 
   useEffect(() => {
+    if (!setIssueData) return;
     setIssueData((prevIssueData) => {
       return { ...prevIssueData, labels: labelList.map((label) => label.id) };
     });
