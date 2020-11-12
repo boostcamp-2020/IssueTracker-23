@@ -13,7 +13,7 @@ const StyledEditorWrapper = styled.div`
   margin-top: 16px;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  width: 100%;
+  width: max-content;
 `;
 
 const BubbleTail = styled.div`
@@ -72,6 +72,12 @@ EditorWrapper.defaultProps = {
   height: 200,
   padding: 10,
   hasTitle: true,
+  value: {
+    author: {
+      profileUrl:
+        'https://github.githubassets.com/images/modules/logos_page/Octocat.png',
+    },
+  },
 };
 
 export default EditorWrapper;
