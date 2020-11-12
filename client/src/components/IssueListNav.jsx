@@ -27,7 +27,7 @@ const FlexContainerJustifyBetween = styled(FlexContainer)`
   justify-content: space-between;
 `;
 
-const searchInputToUrl = (searchInput, myId) => {
+const searchInputToQuery = (searchInput, myId) => {
   const baseUrl = '/';
   const keywords = searchInput.split(' ');
 
@@ -43,7 +43,7 @@ const searchInputToUrl = (searchInput, myId) => {
 };
 
 const IssueListNav = (props) => {
-  const { labels, milestones, ...rest } = props;
+  const { labels, milestones, setQuery, ...rest } = props;
 
   const [isQuerySubmitted, setQuerySubmitted] = useState(false);
   const [isFilterOpened, setFilterOpened] = useState(false);
@@ -51,20 +51,23 @@ const IssueListNav = (props) => {
   const searchBarEnterHandler = (e) => {
     if (e.key === 'Enter') {
       const searchInput = document.getElementById('searchBar').value;
-      const url = searchInputToUrl(searchInput, 'test_id1');
+      const query = searchInputToQuery(searchInput, 'test_id1');
       setQuerySubmitted(true);
-      props.history.push(url);
+      props.history.push(query);
+      setQuery(query);
     }
   };
   const searchBarClearHandler = () => {
     document.getElementById('searchBar').value = '';
     setQuerySubmitted(false);
+    setQuery('');
   };
   const dropdownHandler = () => setFilterOpened(!isFilterOpened);
   const closeDropdownHandler = () => setFilterOpened(false);
   const filterClickHandler = (e) => {
     document.getElementById('searchBar').value = e.target.dataset.searchInput;
     setQuerySubmitted(true);
+    setQuery(props.location.search);
     closeDropdownHandler();
   };
 
