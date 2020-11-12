@@ -38,6 +38,7 @@ const Textarea = ({ placeholder, hasAttacher, width, height }) => {
       width={width}
       height={height}
       onChange={onType}
+      id="textarea"
     />
   );
 };

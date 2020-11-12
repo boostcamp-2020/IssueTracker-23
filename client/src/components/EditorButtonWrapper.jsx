@@ -8,16 +8,19 @@ const StyledEditorButtonWrapper = styled.div`
   margin: 5px;
 `;
 
-const EditorButtonWrapper = ({ CancelButton, PostButton, postable }) => {
-  const testButton = () => {
-    console.log('buttonClick', postable);
-  };
+const EditorButtonWrapper = ({
+  CancelButton,
+  PostButton,
+  postable,
+  onClickCancel,
+  onClickPost,
+}) => {
   return (
     <StyledEditorButtonWrapper>
-      <CancelButton text="Cancel" onClick={testButton}></CancelButton>
+      <CancelButton text="Cancel" onClick={onClickCancel}></CancelButton>
       <PostButton
         text="Post"
-        onClick={testButton}
+        onClick={onClickPost}
         disabled={postable ? null : '#77aa77'}
         bgColor="green"
         color="white"

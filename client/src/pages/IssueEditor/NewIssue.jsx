@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import Axios from 'axios';
 import EditorWrapper from '../../components/EditorWrapper.jsx';
 import SideAssigneePart from '../IssueDetail/SideAssigneePart.jsx';
 import SideLabelPart from '../IssueDetail/SideLabelPart.jsx';
@@ -17,14 +19,39 @@ const SidePartStyle = styled.div`
   margin-left: 30px;
 `;
 
+const host = 'http://localhost:3000';
+const repositoryId = 1;
 const NewIssue = () => {
+  const [issueData, setIssueData] = useState({ author: 'test_id1' });
+
+  const history = useHistory();
+  const onClickCancel = () => {
+    history.push('/');
+  };
+  const onClickPost = () => {
+    const title = document.getElementById('title-editor').value;
+    const description = document.getElementById('textarea').value;
+    Axios.post(`${host}/api/issues/${repositoryId}`, {
+      ...issueData,
+      title,
+      description,
+    }).then((res) => {
+      console.log(res);
+      history.push('/');
+    });
+  };
+
   return (
     <StyledPage>
-      <EditorWrapper />
+      <EditorWrapper
+        onClickCancel={onClickCancel}
+        onClickPost={onClickPost}
+        host={host}
+      />
       <SidePartStyle>
-        <SideAssigneePart />
-        <SideLabelPart />
-        <SideMilestonePart />
+        <SideAssigneePart setIssueData={setIssueData} />
+        <SideLabelPart setIssueData={setIssueData} />
+        <SideMilestonePart setIssueData={setIssueData} />
       </SidePartStyle>
     </StyledPage>
   );

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import CommonSidePart from '@Components/CommonSidePart.jsx';
 import AssigneePart from '@Components/AssigneeInDetail.jsx';
 import styled from 'styled-components';
@@ -13,7 +13,7 @@ const AssigneeListStyle = styled.div`
   border-bottom: 1px solid gray;
 `;
 
-const SideAssigneePart = () => {
+const SideAssigneePart = ({ setIssueData }) => {
   const [assignedUser, setAssignedUser] = useState([]); // 여기에 assignee 불러와야함
 
   const clickItmeHandler = (clickedItem) => {
@@ -28,6 +28,15 @@ const SideAssigneePart = () => {
     }
     setAssignedUser(newList);
   };
+
+  useEffect(() => {
+    setIssueData((prevIssueData) => {
+      return {
+        ...prevIssueData,
+        assignees: assignedUser.map((user) => user.id),
+      };
+    });
+  }, [assignedUser, setIssueData]);
 
   return (
     <div>

@@ -38,7 +38,15 @@ const UserProfile = styled.img`
   object-fit: cover;
 `;
 
-const EditorWrapper = ({ width, height, padding, title }) => {
+const EditorWrapper = ({
+  width,
+  height,
+  padding,
+  hasTitle,
+  onClickCancel,
+  onClickPost,
+  host,
+}) => {
   const [postable, setPostable] = useState(true);
 
   return (
@@ -50,13 +58,18 @@ const EditorWrapper = ({ width, height, padding, title }) => {
       />
       <BubbleTail />
       <StyledEditorWrapper width={width}>
-        {title && <TitleEditor setPostable={setPostable} />}
+        {hasTitle && <TitleEditor setPostable={setPostable} />}
         <EditorNavbar />
         <DescriptionEditor
           width={width - 2 * padding}
           height={height - 2 * padding}
+          host={host}
         />
-        <EditorButtonWrapper postable={postable} />
+        <EditorButtonWrapper
+          postable={postable}
+          onClickCancel={onClickCancel}
+          onClickPost={onClickPost}
+        />
       </StyledEditorWrapper>
     </BubbleWrapper>
   );
@@ -66,7 +79,7 @@ EditorWrapper.defaultProps = {
   width: 600,
   height: 200,
   padding: 10,
-  title: true,
+  hasTitle: true,
 };
 
 export default EditorWrapper;
