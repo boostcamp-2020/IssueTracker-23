@@ -18,19 +18,19 @@ const StyledDescriptionEditor = styled.div`
   border: 1px solid #ccc;
 `;
 
-const DescriptionEditor = ({ counter, attacher, width, height }) => {
+const DescriptionEditor = ({ hasCounter, hasAttacher, width, height }) => {
   return (
     <StyledDescriptionEditor>
-      <Textarea attacher={attacher} width={width} height={height} />
-      {counter && <CharacterCounter attacher={attacher} />}
-      {attacher && <ImageAttacher />}
+      <Textarea hasAttacher={hasAttacher} width={width} height={height} />
+      {hasCounter && <CharacterCounter hasAttacher={hasAttacher} />}
+      {hasAttacher && <ImageAttacher />}
     </StyledDescriptionEditor>
   );
 };
 
 DescriptionEditor.defaultProps = {
-  counter: true,
-  attacher: true,
+  hasCounter: true,
+  hasAttacher: true,
   width: 600,
   height: 100,
 };

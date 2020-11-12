@@ -64,8 +64,12 @@ const SidePartStyle = styled.div`
   margin-left: 30px;
 `;
 
-const IssueDetail = () => {
-  const [issueInfo] = useState(dummyData);
+const IssueDetail = ({ match }) => {
+  const repositoryId = 1;
+  const { id } = match.params;
+  // 위 더미 데이터처럼 데이터가 오면(read issue detail로 받아지는 데이터) 위 더미 데이터를 없애고
+  // 아래의 issueInfo에 그 데이터를 넣으면 됩니다.
+  const issueInfo = dummyData;
   return (
     <IssueDetailContainer>
       <IssueDetailHeader value={issueInfo} />

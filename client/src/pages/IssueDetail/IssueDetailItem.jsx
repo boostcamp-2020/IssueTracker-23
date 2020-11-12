@@ -49,7 +49,10 @@ const IssueDetailItem = (props) => {
         <EditorWrapperStyle>
           <EditorNavbar value={props} />
           <DescriptionEditor />
-          <EditorButtonWrapper onClick={editButtonClickHandler} />{' '}
+          <EditorButtonWrapper
+            postable={true}
+            onClick={editButtonClickHandler}
+          />
         </EditorWrapperStyle>
       );
     return (

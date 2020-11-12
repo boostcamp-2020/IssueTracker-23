@@ -25,7 +25,7 @@ const IssueDetailPart = (props) => {
         <IssueDetailItem key={index} isOwner={false} value={elem} />
       ))}
       <hr />
-      <EditorWrapper value={issueInfo} />
+      <EditorWrapper title={false} value={issueInfo} />
     </IssueDetailPartStyle>
   );
 };

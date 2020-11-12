@@ -2,19 +2,20 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const StyledCharacterCounter = styled.p`
+  display: none;
   position: absolute;
   right: 10px;
-  ${({ attacher }) =>
+  ${({ hasAttacher }) =>
     css`
-      bottom: ${attacher ? 20 : -10}px;
+      bottom: ${hasAttacher ? 20 : -10}px;
     `}
   color: #555;
 `;
 
-const CharacterCounter = ({ attacher }) => {
+const CharacterCounter = ({ hasAttacher }) => {
   return (
     <>
-      <StyledCharacterCounter attacher={attacher}>
+      <StyledCharacterCounter hasAttacher={hasAttacher}>
         0 characters
       </StyledCharacterCounter>
       <div></div>
@@ -23,7 +24,7 @@ const CharacterCounter = ({ attacher }) => {
 };
 
 CharacterCounter.defaultProps = {
-  attacher: true,
+  hasAttacher: true,
 };
 
 export default CharacterCounter;

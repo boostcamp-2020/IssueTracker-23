@@ -8,16 +8,21 @@ const StyledEditorButton = styled.button`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: inset 0px -10px 10px 1px rgba(0, 0, 0, 0.1);
-  ${({ color, backColor }) => css`
+  box-shadow: inset 0px -10px 10px 1px rgba(0, 0, 0, 0.08);
+  ${({ color, bgColor, disabled }) => css`
     color: ${color};
-    background-color: ${backColor};
+    background-color: ${disabled || bgColor};
   `}
 `;
 
-const EditorButton = ({ text, color, backColor }) => {
+const EditorButton = ({ text, color, bgColor, onClick, disabled }) => {
   return (
-    <StyledEditorButton color={color} backColor={backColor}>
+    <StyledEditorButton
+      color={color}
+      bgColor={bgColor}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {text}
     </StyledEditorButton>
   );
@@ -26,7 +31,7 @@ const EditorButton = ({ text, color, backColor }) => {
 EditorButton.defaultProps = {
   text: '',
   color: 'black',
-  backColor: 'white',
+  bgColor: 'white',
 };
 
 export default EditorButton;
