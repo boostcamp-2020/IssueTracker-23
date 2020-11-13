@@ -46,7 +46,6 @@ const CheckboxStateContainer = styled.span`
 const CheckboxContainer = styled.div``;
 const IssueContent = ({ data }) => {
   const assigneesData = data.assignees;
-  console.log(data);
   const stateSvg = () =>
     data.closdAt ? (
       <Svg

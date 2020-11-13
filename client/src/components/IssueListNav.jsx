@@ -67,8 +67,9 @@ const IssueListNav = (props) => {
   const filterClickHandler = (e) => {
     document.getElementById('searchBar').value = e.target.dataset.searchInput;
     setQuerySubmitted(true);
-    setQuery(props.location.search);
     closeDropdownHandler();
+    const { href } = e.target;
+    setQuery(href.slice(href.indexOf('?')));
   };
 
   return (
