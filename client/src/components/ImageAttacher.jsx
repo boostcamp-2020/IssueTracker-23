@@ -61,7 +61,7 @@ const ImageAttacher = ({ host }) => {
 };
 
 ImageAttacher.defaultProps = {
-  host: 'http://localhost:3000',
+  host: 'http://101.101.208.162:3000',
 };
 
 export default ImageAttacher;
