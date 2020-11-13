@@ -5,10 +5,11 @@ const SvgContainer = styled.span`
   ${(props) =>
     css`
       margin: ${props.margin};
+      fill: ${props.fill};
     `}
 `;
 const Svg = (props) => (
-  <SvgContainer margin={props.margin}>
+  <SvgContainer margin={props.margin} fill={props.fill}>
     <svg
       viewBox="0 0 16 16"
       version="1.1"
