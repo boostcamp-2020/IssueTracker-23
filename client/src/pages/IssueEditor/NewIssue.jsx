@@ -8,6 +8,7 @@ import SideLabelPart from '../IssueDetail/SideLabelPart.jsx';
 import SideMilestonePart from '../IssueDetail/SideMilestonePart.jsx';
 
 const StyledPage = styled.div`
+  width: 75%;
   margin: 30px;
 `;
 

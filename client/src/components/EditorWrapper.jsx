@@ -14,7 +14,7 @@ const StyledEditorWrapper = styled.div`
   border: 1px solid #ccc;
   border-radius: 0.5em;
   ${({ width }) => css`
-    width: ${width}px;
+    width: ${width}%;
   `}
 `;
 
@@ -70,7 +70,7 @@ const EditorWrapper = ({
 };
 
 EditorWrapper.defaultProps = {
-  width: 600,
+  width: 75,
   height: 200,
   padding: 10,
   hasTitle: true,
